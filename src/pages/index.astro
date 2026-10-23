@@ -271,13 +271,18 @@ const redes = cierre.redes.filter((r) => r.url);
   @media (max-width: 900px) { .amores { grid-template-columns: 1fr; } }
 
   /* Cierre */
-  .cierre { position: relative; background: var(--negro); color: #fff; overflow: hidden; }
-  .cierre :global(.cierre__img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .cierre { position: relative; background: var(--negro); color: #fff; overflow: hidden; display: grid; grid-template-rows: 1fr auto auto; min-height: clamp(560px, 46vw, 900px); }
+  .cierre :global(.cierre__img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 66% 18%; }
   .cierre :global(.foto--pendiente.cierre__img) { background: linear-gradient(135deg, var(--rojo), #5c0000); }
   .cierre :global(.foto--pendiente.cierre__img span) { display: none; }
-  .cierre__velo { position: absolute; inset: 0; background: linear-gradient(0deg, rgb(19 17 12 / 0.85), rgb(19 17 12 / 0.45)); }
-  .cierre__in { position: relative; padding-block: clamp(96px, 16vw, 200px) clamp(56px, 8vw, 96px); }
-  .cierre__frase { font: italic 500 clamp(2rem, 4.8vw, 3.9rem)/1.12 var(--serif); max-width: 24ch; }
+  .cierre__velo { position: absolute; inset: 0; background: linear-gradient(90deg, rgb(19 17 12 / 0.88) 0%, rgb(19 17 12 / 0.6) 38%, rgb(19 17 12 / 0.05) 70%), linear-gradient(0deg, rgb(19 17 12 / 0.5), transparent 35%); }
+  .cierre__in { position: relative; align-self: end; padding-block: clamp(96px, 16vw, 200px) clamp(56px, 8vw, 96px); }
+  .cierre__frase { font: italic 500 clamp(2rem, 3.6vw, 3.2rem)/1.14 var(--serif); max-width: 22ch; }
+  @media (max-width: 760px) {
+    .cierre__velo { background: linear-gradient(0deg, rgb(19 17 12 / 0.92) 0%, rgb(19 17 12 / 0.75) 45%, rgb(19 17 12 / 0.05) 72%); }
+    .cierre :global(.cierre__img) { object-position: 64% 10%; }
+    .cierre__in { padding-top: 52vh; }
+  }
   .firma { margin-top: 1.5rem; font: 400 clamp(2.4rem, 5vw, 3.6rem)/1 var(--display); text-transform: uppercase; color: var(--ambar); }
   .cierre :global(.boton-video) { margin-top: 2rem; }
   .redes { list-style: none; padding: 0; margin: 2rem 0 0; display: flex; gap: 0.75rem; }

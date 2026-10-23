@@ -1,0 +1,148 @@
+---
+// Guía para buscar las fotos originales: muestra cada foto de maqueta y qué foto real la reemplaza
+import Base from '../layouts/Base.astro';
+import Foto from '../components/Foto.astro';
+import Tejido from '../components/Tejido.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+type Pieza = { clave: string; que: string; formato: string; ratio: string; archivo?: boolean };
+const bloques: { titulo: string; ancla: string; piezas: Pieza[] }[] = [
+  {
+    titulo: 'Portada', ancla: 'inicio',
+    piezas: [
+      { clave: 'portada', ratio: '16 / 9', formato: 'Horizontal 16:9 · mínimo 2400 px de ancho', que: 'Retrato principal de Víctor Armando en exteriores (Popayán o el Macizo), camisa blanca con las mangas recogidas, luz natural, mirada a cámara. Él a un lado y espacio libre al otro para el texto.' },
+      { clave: 'portada-vertical', ratio: '9 / 16', formato: 'Vertical 9:16 · para celular', que: 'La misma sesión del retrato principal en toma vertical, con la cara en la mitad superior.' },
+    ],
+  },
+  {
+    titulo: 'Uno · Sus raíces', ancla: 'raices',
+    piezas: [
+      { clave: 'raices-abuela', ratio: '4 / 5', archivo: true, formato: 'Vertical 4:5 · escaneo a 300 dpi', que: 'Foto de época de la abuela, la casa de El Rosal o los hermanos. Escanear el original; se publica en blanco y negro.' },
+      { clave: 'raices-el-rosal', ratio: '3 / 2', formato: 'Horizontal 3:2', que: 'El Rosal hoy: la escuela, la casa de la infancia o el paisaje del Macizo.' },
+    ],
+  },
+  {
+    titulo: 'Dos · Popayán, su casa', ancla: 'popayan',
+    piezas: [
+      { clave: 'popayan', ratio: '16 / 9', formato: 'Horizontal 16:9', que: 'Víctor Armando en el centro histórico de Popayán o en su barrio, en un momento cotidiano.' },
+      { clave: 'hito-ulloa', ratio: '1 / 1', archivo: true, formato: 'Cuadrada 1:1', que: 'Grado de bachiller en el Colegio Francisco Antonio de Ulloa.' },
+      { clave: 'hito-militar', ratio: '1 / 1', archivo: true, formato: 'Cuadrada 1:1', que: 'Servicio militar: subteniente de la reserva.' },
+      { clave: 'hito-unicauca', ratio: '1 / 1', archivo: true, formato: 'Cuadrada 1:1', que: 'Grado de Ingeniero Agroindustrial en la Universidad del Cauca.' },
+    ],
+  },
+  {
+    titulo: 'Tres · Su trayectoria', ancla: 'trayectoria',
+    piezas: [
+      { clave: 'hito-alcalde', ratio: '1 / 1', archivo: true, formato: 'Cuadrada 1:1', que: 'Posesión como alcalde de San Sebastián (2008).' },
+      { clave: 'hito-licorera', ratio: '1 / 1', archivo: true, formato: 'Cuadrada 1:1', que: 'Gerencia de la Industria Licorera del Cauca: entrega del premio Monde Selection (2011).' },
+      { clave: 'hito-art', ratio: '1 / 1', formato: 'Cuadrada 1:1', que: 'Trabajo con comunidades como coordinador regional de la Agencia de Renovación del Territorio (2023–2025).' },
+    ],
+  },
+  {
+    titulo: 'Cuatro · Lo que ha construido', ancla: 'construido',
+    piezas: [
+      { clave: 'obra-cafe', ratio: '3 / 2', formato: 'Horizontal 3:2', que: '200 parcelas cafeteras: caficultores en El Rosal o Paramillo.' },
+      { clave: 'obra-vivero', ratio: '3 / 2', formato: 'Horizontal 3:2', que: 'El primer vivero municipal de San Sebastián, hoy en funcionamiento.' },
+      { clave: 'obra-terneras', ratio: '3 / 2', formato: 'Horizontal 3:2', que: '630 terneras: una familia campesina con su ganado.' },
+      { clave: 'obra-casa-paso', ratio: '3 / 2', formato: 'Horizontal 3:2', que: 'La casa de paso en Popayán para campesinos con cita médica (foto actual o de época).' },
+      { clave: 'obra-monde', ratio: '3 / 2', formato: 'Horizontal 3:2', que: 'Botella de aguardiente caucano y el certificado o medalla Monde Selection 2011.' },
+      { clave: 'obra-art', ratio: '3 / 2', formato: 'Horizontal 3:2', que: 'Una obra PDET de la regional Cauca, Nariño y Valle (vía, escuela, puente).' },
+    ],
+  },
+  {
+    titulo: 'Cinco · Lo que lo mueve', ancla: 'mueve',
+    piezas: [
+      { clave: 'amor-gente', ratio: '4 / 5', formato: 'Vertical 4:5', que: 'La gente: Víctor Armando escuchando o abrazando a una persona de la comunidad.' },
+      { clave: 'amor-ciudad', ratio: '4 / 5', formato: 'Vertical 4:5', que: 'La ciudad: patrimonio de Popayán, Semana Santa o gastronomía.' },
+      { clave: 'amor-suyos', ratio: '4 / 5', formato: 'Vertical 4:5', que: 'Los suyos: la familia, con su consentimiento. Otra opción: manos o mesa familiar con los rostros fuera del encuadre.' },
+    ],
+  },
+  {
+    titulo: 'Cierre', ancla: 'cierre',
+    piezas: [
+      { clave: 'cierre', ratio: '16 / 9', formato: 'Horizontal 16:9', que: 'Víctor Armando con la gente en la galería o en un barrio, compartiendo una empanada de pipián o una conversación.' },
+    ],
+  },
+];
+const total = bloques.reduce((n, b) => n + b.piezas.length, 0);
+let n = 0;
+---
+<Base titulo="Guía de fotos · Víctor Armando">
+  <header class="cabeza">
+    <div class="contenedor">
+      <p class="sello">Guía de fotos</p>
+      <h1>Fotos originales para la página</h1>
+      <p class="intro">
+        Cada imagen de esta guía es una <strong>foto de maqueta</strong> hecha con inteligencia artificial para armar el diseño.
+        Para cada una buscamos la <strong>foto original</strong> de Víctor Armando que la reemplaza: mismo momento, mismo formato.
+      </p>
+      <ol class="pasos">
+        <li>Busca la foto original que corresponde a cada número ({total} en total).</li>
+        <li>Nombra el archivo con el código en amarillo, por ejemplo <code>hito-alcalde.jpg</code>.</li>
+        <li>Entrega el archivo en la mejor resolución disponible. Las fotos de archivo (marcadas «Archivo») van escaneadas a 300 dpi.</li>
+      </ol>
+      <a class="ver" href={base}>Ver la página completa →</a>
+    </div>
+  </header>
+  <Tejido alto="10px" />
+
+  <main class="contenedor">
+    {bloques.map((b) => (
+      <section class="bloque">
+        <h2><a href={`${base}#${b.ancla}`}>{b.titulo}</a></h2>
+        <ul class="piezas">
+          {b.piezas.map((p) => (
+            <li class="pieza">
+              <div class="pieza__img">
+                <Foto clave={p.clave} ratio={p.ratio} widths={[400, 700]} sizes="(min-width: 900px) 380px, 100vw" alt={`Foto de maqueta: ${p.que}`} />
+                <span class="pieza__n">{++n}</span>
+              </div>
+              <div class="pieza__txt">
+                <p class="codigo"><code>{p.clave}.jpg</code>{p.archivo && <span class="tag">Archivo</span>}</p>
+                <p class="que">{p.que}</p>
+                <p class="formato">{p.formato}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </main>
+
+  <footer class="pie">
+    <Tejido alto="8px" />
+    <p class="contenedor">Guía de trabajo · Hoja de vida web de Víctor Armando Martínez Perafán</p>
+  </footer>
+</Base>
+
+<style>
+  .cabeza { background: var(--azul); color: #fff; padding-block: clamp(48px, 8vw, 96px) clamp(40px, 6vw, 72px); }
+  .sello { display: inline-block; background: var(--ambar); color: var(--negro); font: 400 1.2rem/1 var(--display); letter-spacing: 0.12em; text-transform: uppercase; padding: 0.45rem 0.75rem 0.35rem; }
+  h1 { font-size: clamp(3rem, 8vw, 6rem); margin-top: 1rem; }
+  .intro { margin-top: 1.25rem; max-width: 60ch; font-size: 1.15rem; }
+  .pasos { margin: 1.5rem 0 0; padding-left: 1.3rem; max-width: 64ch; display: grid; gap: 0.4rem; }
+  .pasos code, .codigo code { font: 600 0.95em/1 ui-monospace, Consolas, monospace; }
+  .pasos code { background: rgb(255 255 255 / 0.15); padding: 0.1rem 0.35rem; }
+  .ver { display: inline-block; margin-top: 2rem; background: var(--rojo); color: #fff; text-decoration: none; font: 400 1.35rem/1 var(--display); letter-spacing: 0.04em; text-transform: uppercase; padding: 0.8rem 1.2rem 0.7rem; }
+  .ver:hover { background: var(--negro); }
+
+  .bloque { padding-top: clamp(48px, 7vw, 80px); }
+  .bloque h2 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); }
+  .bloque h2 a { text-decoration: none; }
+  .bloque h2 a:hover { color: var(--azul); }
+  .piezas { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+  .pieza { background: var(--gris-claro); display: flex; flex-direction: column; }
+  .pieza__img { position: relative; background: var(--negro); }
+  .pieza__img :global(.foto) { max-height: 420px; object-fit: contain; background: var(--negro); }
+  .pieza__n { position: absolute; top: 0; left: 0; background: var(--rojo); color: #fff; font: 400 1.6rem/1 var(--display); padding: 0.45rem 0.7rem 0.35rem; }
+  .pieza__txt { padding: 1rem 1.1rem 1.2rem; display: grid; gap: 0.5rem; }
+  .codigo { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+  .codigo code { background: var(--ambar); color: var(--negro); padding: 0.3rem 0.5rem; }
+  .tag { font: 400 1rem/1 var(--display); letter-spacing: 0.08em; text-transform: uppercase; background: var(--azul); color: #fff; padding: 0.3rem 0.5rem 0.2rem; }
+  .que { font-size: 1rem; line-height: 1.45; }
+  .formato { font-size: 0.9rem; color: var(--gris); }
+
+  .pie { margin-top: clamp(64px, 9vw, 112px); background: var(--negro); color: #fff; }
+  .pie p { padding-block: 1.1rem; font-size: 0.85rem; opacity: 0.8; }
+</style>

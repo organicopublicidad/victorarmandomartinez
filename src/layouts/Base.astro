@@ -4,9 +4,15 @@ import { sitio, portada } from '../data/contenido';
 import { foto } from '../lib/medios';
 import { getImage } from 'astro:assets';
 
+interface Props { titulo?: string }
+const { titulo = sitio.titulo } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+// Mientras la página vive en la dirección de muestra, los buscadores la omiten
+const esMuestra = base !== '/';
+
 const og = foto('compartir') ?? foto('portada');
 const ogImg = og ? await getImage({ src: og, width: 1200, height: 630, fit: 'cover', format: 'jpg' }) : null;
-const ogUrl = ogImg ? new URL(ogImg.src, sitio.url).href : null;
+const ogUrl = ogImg ? new URL(ogImg.src, Astro.site ?? sitio.url).href : null;
 
 const persona = {
   '@context': 'https://schema.org',
@@ -25,11 +31,12 @@ const persona = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{sitio.titulo}</title>
+    <title>{titulo}</title>
+    {esMuestra && <meta name="robots" content="noindex, nofollow" />}
     <meta name="description" content={sitio.descripcion} />
     <link rel="canonical" href={sitio.url + '/'} />
     <meta name="theme-color" content="#2619d1" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
 
     <meta property="og:type" content="profile" />
     <meta property="og:locale" content="es_CO" />

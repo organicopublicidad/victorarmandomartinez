@@ -2,6 +2,7 @@
   /* Paleta tomada de zohranfornyc.com */
   --azul: #2619d1;
   --azul-hondo: #133384;
+  --rojo-hondo: #5c0000;
   --ambar: #ffab00;
   --rojo: #e81900;
   --negro: #13110c;
@@ -41,7 +42,7 @@ p { margin: 0; }
 
 .numero {
   display: inline-block; font: 400 1.15rem/1 var(--display); letter-spacing: 0.12em; text-transform: uppercase;
-  background: var(--rojo); color: #fff; padding: 0.4rem 0.7rem 0.3rem;
+  background: var(--azul); color: #fff; padding: 0.4rem 0.7rem 0.3rem;
 }
 .titulo { font-size: clamp(3.4rem, 9vw, 7rem); margin-top: 1rem; }
 .cita { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(1.7rem, 3.6vw, 2.75rem); line-height: 1.18; }

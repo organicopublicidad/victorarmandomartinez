@@ -84,13 +84,13 @@ const base = h ? await getImage({ src: h, width: Math.min(1600, h.width), format
 </section>
 
 <style>
-  .barra { position: sticky; top: 0; z-index: 50; background: var(--azul); color: #fff; }
+  .barra { position: sticky; top: 0; z-index: 50; background: var(--rojo); color: #fff; }
   .barra__in { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 80px; }
   .marca { display: block; flex: none; line-height: 0; }
   .marca :global(.marca__logo) { width: 255px; height: auto; }
   .barra ul { display: flex; gap: 1.6rem; list-style: none; margin: 0; padding: 0; }
   .barra nav a { font: 400 1.3rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; white-space: nowrap; }
-  .barra nav a:hover { color: var(--ambar); }
+  .barra nav a:hover { text-decoration: underline; text-decoration-color: var(--ambar); text-decoration-thickness: 3px; text-underline-offset: 6px; }
   .menu__n { display: none; }
   .menu-btn { display: none; }
 
@@ -114,20 +114,20 @@ const base = h ? await getImage({ src: h, width: Math.min(1600, h.width), format
 
     .barra nav {
       display: none; position: fixed; left: 0; right: 0; top: 72px; bottom: 0; overflow-y: auto;
-      background: var(--azul); padding: 1rem var(--gutter) 3rem;
+      background: var(--rojo); padding: 1rem var(--gutter) 3rem;
       border-top: 3px solid var(--ambar);
     }
     .abierta nav { display: block; }
     .barra ul { flex-direction: column; gap: 0; }
     .barra li { border-bottom: 1px solid rgb(255 255 255 / 0.2); }
     .barra nav a { display: flex; align-items: baseline; gap: 1rem; padding: 1.1rem 0 0.9rem; font-size: clamp(2.4rem, 11vw, 3.4rem); white-space: normal; }
-    .menu__n { display: inline; font-size: 1.2rem; color: var(--ambar); letter-spacing: 0.1em; }
+    .menu__n { display: inline; font-size: 1.2rem; color: rgb(255 255 255 / 0.8); letter-spacing: 0.1em; }
   }
   :global(html.sin-scroll) { overflow: hidden; }
 
-  .portada { position: relative; min-height: calc(100svh - 80px); display: grid; grid-template-rows: 1fr auto; color: #fff; overflow: hidden; background: var(--azul-hondo); }
+  .portada { position: relative; min-height: calc(100svh - 80px); display: grid; grid-template-rows: 1fr auto; color: #fff; overflow: hidden; background: var(--rojo-hondo); }
   .portada__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 12%; }
-  .portada__img--pendiente { display: grid; place-items: start end; padding: 2rem; background: linear-gradient(120deg, var(--azul-hondo), var(--azul)); }
+  .portada__img--pendiente { display: grid; place-items: start end; padding: 2rem; background: linear-gradient(120deg, var(--rojo-hondo), var(--rojo)); }
   .portada__img--pendiente span { border: 1px dashed rgb(255 255 255 / 0.6); padding: 0.6rem 0.9rem; font-size: 0.9rem; max-width: 30ch; }
   .portada__velo { position: absolute; inset: 0; background: linear-gradient(90deg, rgb(19 17 12 / 0.78) 0%, rgb(19 17 12 / 0.35) 55%, transparent 80%), linear-gradient(0deg, rgb(19 17 12 / 0.55), transparent 40%); }
   .portada__texto { position: relative; align-self: end; padding-block: 18vh 2.5rem; }

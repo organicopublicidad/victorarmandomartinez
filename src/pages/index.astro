@@ -8,7 +8,7 @@ import BotonVideo from '../components/BotonVideo.astro';
 import { raices, popayan, trayectoria, construido, mueve, cierre, videosActivos } from '../data/contenido';
 import { video } from '../lib/medios';
 
-const coloresFicha = ['var(--azul)', 'var(--rojo)', 'var(--ambar)', 'var(--negro)', 'var(--azul-hondo)'];
+const coloresFicha = ['var(--rojo)', 'var(--azul)', 'var(--ambar)', 'var(--negro)', 'var(--rojo-hondo)'];
 const redes = cierre.redes.filter((r) => r.url);
 ---
 <Base>
@@ -180,9 +180,9 @@ const redes = cierre.redes.filter((r) => r.url);
 <style>
   .cuerpo { margin-top: 1.5rem; font-size: 1.15rem; max-width: 52ch; }
   .remate { margin-top: 1rem; font-weight: 600; font-size: 1.15rem; }
-  .cita--azul { color: var(--azul); margin-top: 1.25rem; }
+  .cita--azul { color: var(--rojo); margin-top: 1.25rem; }
   .numero--ambar { background: var(--ambar); color: var(--negro); }
-  .numero--azul { background: var(--azul); }
+  .numero--azul { background: var(--rojo); }
 
   /* Raíces */
   .raices__grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(2rem, 6vw, 5.5rem); align-items: center; }
@@ -196,18 +196,18 @@ const redes = cierre.redes.filter((r) => r.url);
 
   /* Popayán */
   .popayan { background: var(--ambar); }
-  .popayan .numero { background: var(--azul); }
+  .popayan .numero { background: var(--rojo); }
   .popayan__grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
   .hitos { list-style: none; padding: 0; margin: clamp(3rem, 6vw, 4.5rem) 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
   .hito { background: var(--blanco); }
   .hito__txt { display: flex; gap: 0.9rem; padding: 1.1rem 1.2rem 1.3rem; align-items: flex-start; }
-  .hito__n { font: 400 2.6rem/0.9 var(--display); color: var(--rojo); }
+  .hito__n { font: 400 2.6rem/0.9 var(--display); color: var(--azul); }
   .hito__txt p { font-size: 1rem; line-height: 1.45; }
-  .franja { position: relative; overflow: hidden; background: var(--rojo); color: #fff; padding-block: clamp(6rem, 14vw, 11rem); }
-  .franja::before { content: ''; position: absolute; inset: 0; background: rgb(232 25 0 / 0.74); z-index: 1; }
+  .franja { position: relative; overflow: hidden; background: var(--azul); color: #fff; padding-block: clamp(6rem, 14vw, 11rem); }
+  .franja::before { content: ''; position: absolute; inset: 0; background: rgb(38 25 209 / 0.74); z-index: 1; }
   .franja :global(.franja__img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
   .franja :global(.foto--pendiente.franja__img) { display: none; }
-  .franja .cita { position: relative; z-index: 2; font-size: clamp(2.2rem, 5.4vw, 4.2rem); text-shadow: 0 2px 18px rgb(92 0 0 / 0.35); }
+  .franja .cita { position: relative; z-index: 2; font-size: clamp(2.2rem, 5.4vw, 4.2rem); text-shadow: 0 2px 18px rgb(19 51 132 / 0.35); }
   @media (max-width: 900px) {
     .popayan__grid { grid-template-columns: 1fr; }
     .hitos { grid-template-columns: 1fr; }
@@ -215,7 +215,7 @@ const redes = cierre.redes.filter((r) => r.url);
   }
 
   /* Trayectoria */
-  .trayectoria { background: var(--azul); color: #fff; }
+  .trayectoria { background: var(--rojo); color: #fff; }
   .trayectoria .entradilla { color: rgb(255 255 255 / 0.85); }
   .linea-wrap { margin-top: clamp(2.5rem, 5vw, 4rem); overflow-x: auto; scroll-snap-type: x proximity; scrollbar-color: var(--ambar) transparent; scroll-padding-inline: var(--gutter); }
   .linea { --foto: 200px; list-style: none; margin: 0; display: flex; align-items: flex-start; padding: 0 0 1.5rem; width: max-content; position: relative; }
@@ -224,13 +224,13 @@ const redes = cierre.redes.filter((r) => r.url);
   .punto { scroll-snap-align: start; flex: 0 0 230px; padding-right: 1.75rem; display: flex; flex-direction: column; position: relative; z-index: 1; }
   .punto__foto { height: var(--foto); display: flex; align-items: flex-end; padding-bottom: 14px; }
   .punto__foto :global(.foto) { width: 180px; border: 4px solid var(--ambar); }
-  .punto__icono { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--blanco); color: var(--azul); flex: none; }
+  .punto__icono { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--blanco); color: var(--rojo); flex: none; }
   .punto--hito .punto__icono { background: var(--ambar); color: var(--negro); }
-  .punto__anio { margin-top: 0.9rem; font: 400 1.9rem/1 var(--display); color: var(--ambar); }
+  .punto__anio { margin-top: 0.9rem; font: 400 2rem/1 var(--display); color: #fff; }
   .punto__cargo { margin-top: 0.45rem; font-weight: 500; line-height: 1.3; }
   .punto--hito .punto__cargo { font-weight: 600; }
   .punto__lugar { font-size: 0.9rem; opacity: 0.8; margin-top: 0.35rem; line-height: 1.35; }
-  .desliza { margin-top: 0.75rem; font: 400 1.15rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.08em; color: var(--ambar); }
+  .desliza { margin-top: 0.75rem; font: 400 1.15rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.08em; color: #fff; }
   @media (max-width: 760px) {
     .linea-wrap { overflow: visible; }
     .linea { flex-direction: column; align-items: stretch; width: auto; padding: 0 var(--gutter); }
@@ -251,10 +251,10 @@ const redes = cierre.redes.filter((r) => r.url);
   .obra { all: unset; box-sizing: border-box; display: flex; flex-direction: column; width: 100%; background: var(--gris-claro); cursor: default; transition: transform 0.2s, box-shadow 0.2s; }
   button.obra { cursor: pointer; }
   button.obra:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ambar); }
-  button.obra:focus-visible { outline: 3px solid var(--rojo); outline-offset: 3px; }
-  .obra__titulo { font: 400 clamp(1.9rem, 3vw, 2.6rem)/0.95 var(--display); text-transform: uppercase; color: var(--azul); padding: 1.2rem 1.2rem 0; }
+  button.obra:focus-visible { outline: 3px solid var(--azul); outline-offset: 3px; }
+  .obra__titulo { font: 400 clamp(1.9rem, 3vw, 2.6rem)/0.95 var(--display); text-transform: uppercase; color: var(--rojo); padding: 1.2rem 1.2rem 0; }
   .obra__texto { padding: 0.6rem 1.2rem 1.2rem; font-size: 1rem; line-height: 1.45; flex: 1; }
-  .obra__ver { display: inline-flex; align-items: center; gap: 0.4rem; margin: 0 1.2rem 1.2rem; font: 400 1.1rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.05em; color: var(--rojo); }
+  .obra__ver { display: inline-flex; align-items: center; gap: 0.4rem; margin: 0 1.2rem 1.2rem; font: 400 1.1rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.05em; color: var(--azul); }
   @media (max-width: 900px) { .obras { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 520px) {
     .obras { gap: 0.75rem; }
@@ -266,7 +266,7 @@ const redes = cierre.redes.filter((r) => r.url);
   /* Lo que lo mueve */
   .mueve { background: var(--crema); }
   .amores { list-style: none; padding: 0; margin: clamp(2.5rem, 5vw, 4rem) 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.25rem, 3vw, 2.5rem); }
-  .amores h3 { font-size: 2.6rem; margin-top: 1rem; color: var(--rojo); }
+  .amores h3 { font-size: 2.6rem; margin-top: 1rem; color: var(--azul); }
   .amores p { margin-top: 0.5rem; font-size: 1.05rem; }
   .conv__titulo { margin-top: clamp(3rem, 6vw, 5rem); font-size: clamp(2.2rem, 4vw, 3.2rem); }
   .fichas { list-style: none; padding: 0; margin: 1.25rem 0 0; display: flex; flex-wrap: wrap; gap: 0.75rem; }
@@ -277,7 +277,7 @@ const redes = cierre.redes.filter((r) => r.url);
   /* Cierre */
   .cierre { position: relative; background: var(--negro); color: #fff; overflow: hidden; display: grid; grid-template-rows: 1fr auto auto; min-height: clamp(560px, 46vw, 900px); }
   .cierre :global(.cierre__img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 66% 18%; }
-  .cierre :global(.foto--pendiente.cierre__img) { background: linear-gradient(135deg, var(--rojo), #5c0000); }
+  .cierre :global(.foto--pendiente.cierre__img) { background: linear-gradient(135deg, var(--azul), var(--azul-hondo)); }
   .cierre :global(.foto--pendiente.cierre__img span) { display: none; }
   .cierre__velo { position: absolute; inset: 0; background: linear-gradient(90deg, rgb(19 17 12 / 0.88) 0%, rgb(19 17 12 / 0.6) 38%, rgb(19 17 12 / 0.05) 70%), linear-gradient(0deg, rgb(19 17 12 / 0.5), transparent 35%); }
   .cierre__in { position: relative; align-self: end; padding-block: clamp(96px, 16vw, 200px) clamp(56px, 8vw, 96px); }
@@ -290,7 +290,7 @@ const redes = cierre.redes.filter((r) => r.url);
   .firma { margin-top: 1.5rem; font: 400 clamp(2.4rem, 5vw, 3.6rem)/1 var(--display); text-transform: uppercase; color: var(--ambar); }
   .cierre :global(.boton-video) { margin-top: 2rem; }
   .redes { list-style: none; padding: 0; margin: 2rem 0 0; display: flex; gap: 0.75rem; }
-  .redes a { display: grid; place-items: center; width: 48px; height: 48px; background: #fff; color: var(--azul); transition: background 0.2s; }
+  .redes a { display: grid; place-items: center; width: 48px; height: 48px; background: #fff; color: var(--rojo); transition: background 0.2s; }
   .redes a:hover { background: var(--ambar); }
   .cierre > :global(.tejido) { position: relative; }
   .pie { position: relative; padding-block: 1.1rem; font-size: 0.85rem; opacity: 0.75; }

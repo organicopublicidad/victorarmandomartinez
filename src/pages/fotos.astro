@@ -154,38 +154,38 @@ let n = 0;
 </Base>
 
 <style>
-  .cabeza { background: var(--azul); color: #fff; padding-block: clamp(48px, 8vw, 96px) clamp(40px, 6vw, 72px); }
+  .cabeza { background: var(--rojo); color: #fff; padding-block: clamp(48px, 8vw, 96px) clamp(40px, 6vw, 72px); }
   .sello { display: inline-block; background: var(--ambar); color: var(--negro); font: 400 1.2rem/1 var(--display); letter-spacing: 0.12em; text-transform: uppercase; padding: 0.45rem 0.75rem 0.35rem; }
   h1 { font-size: clamp(3rem, 8vw, 6rem); margin-top: 1rem; }
   .intro { margin-top: 1.25rem; max-width: 60ch; font-size: 1.15rem; }
   .pasos { margin: 1.5rem 0 0; padding-left: 1.3rem; max-width: 64ch; display: grid; gap: 0.4rem; }
   .pasos code, .codigo code { font: 600 0.95em/1 ui-monospace, Consolas, monospace; }
   .pasos code { background: rgb(255 255 255 / 0.15); padding: 0.1rem 0.35rem; }
-  .ver { display: inline-block; margin-top: 2rem; background: var(--rojo); color: #fff; text-decoration: none; font: 400 1.35rem/1 var(--display); letter-spacing: 0.04em; text-transform: uppercase; padding: 0.8rem 1.2rem 0.7rem; }
+  .ver { display: inline-block; margin-top: 2rem; background: var(--azul); color: #fff; text-decoration: none; font: 400 1.35rem/1 var(--display); letter-spacing: 0.04em; text-transform: uppercase; padding: 0.8rem 1.2rem 0.7rem; }
   .ver:hover { background: var(--negro); }
 
   .bloque { padding-top: clamp(48px, 7vw, 80px); }
   .bloque h2 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); }
   .bloque h2 a { text-decoration: none; }
-  .bloque h2 a:hover { color: var(--azul); }
+  .bloque h2 a:hover { color: var(--rojo); }
   .piezas { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
   .pieza { background: var(--gris-claro); display: flex; flex-direction: column; }
   .pieza__img { position: relative; background: var(--negro); }
   .pieza__img :global(.foto) { max-height: 420px; object-fit: contain; background: var(--negro); }
-  .pieza__n { position: absolute; top: 0; left: 0; background: var(--rojo); color: #fff; font: 400 1.6rem/1 var(--display); padding: 0.45rem 0.7rem 0.35rem; }
+  .pieza__n { position: absolute; top: 0; left: 0; background: var(--azul); color: #fff; font: 400 1.6rem/1 var(--display); padding: 0.45rem 0.7rem 0.35rem; }
   .pieza__txt { padding: 1rem 1.1rem 1.2rem; display: grid; gap: 0.5rem; }
   .codigo { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
   .codigo code { background: var(--ambar); color: var(--negro); padding: 0.3rem 0.5rem; }
-  .tag { font: 400 1rem/1 var(--display); letter-spacing: 0.08em; text-transform: uppercase; background: var(--azul); color: #fff; padding: 0.3rem 0.5rem 0.2rem; }
+  .tag { font: 400 1rem/1 var(--display); letter-spacing: 0.08em; text-transform: uppercase; background: var(--rojo); color: #fff; padding: 0.3rem 0.5rem 0.2rem; }
   .que { font-size: 1rem; line-height: 1.45; }
   .formato { font-size: 0.9rem; color: var(--gris); }
 
-  .prioridad { display: inline-block; background: var(--rojo); color: #fff; font: 400 1.15rem/1 var(--display); letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 0.7rem 0.3rem; margin-bottom: 0.9rem; }
+  .prioridad { display: inline-block; background: var(--azul); color: #fff; font: 400 1.15rem/1 var(--display); letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 0.7rem 0.3rem; margin-bottom: 0.9rem; }
   .nota { margin-top: 1rem; max-width: 70ch; }
   .videos { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
-  .video { display: grid; grid-template-columns: auto 1fr; gap: 1rem; background: var(--crema); padding: 1.1rem 1.2rem 1.2rem; border-left: 6px solid var(--rojo); }
-  .video__n { font: 400 2.4rem/0.9 var(--display); color: var(--rojo); }
-  .video h3 { font-size: 1.7rem; margin: 0.6rem 0 0.4rem; color: var(--azul); }
+  .video { display: grid; grid-template-columns: auto 1fr; gap: 1rem; background: var(--crema); padding: 1.1rem 1.2rem 1.2rem; border-left: 6px solid var(--azul); }
+  .video__n { font: 400 2.4rem/0.9 var(--display); color: var(--azul); }
+  .video h3 { font-size: 1.7rem; margin: 0.6rem 0 0.4rem; color: var(--rojo); }
   .video .que { margin-bottom: 0.5rem; }
   .pie { margin-top: clamp(64px, 9vw, 112px); background: var(--negro); color: #fff; }
   .pie p { padding-block: 1.1rem; font-size: 0.85rem; opacity: 0.8; }

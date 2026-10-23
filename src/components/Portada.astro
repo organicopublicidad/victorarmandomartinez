@@ -12,12 +12,12 @@ const h = foto('portada');
 const v = foto('portada-vertical');
 const srcset = async (img: ImageMetadata | undefined, anchos: number[]) => {
   if (!img) return undefined;
-  const out = await Promise.all(anchos.filter((w) => w <= img.width).map((w) => getImage({ src: img, width: w, format: 'webp' })));
+  const out = await Promise.all(anchos.filter((w) => w <= img.width).map((w) => getImage({ src: img, width: w, format: 'webp', quality: 68 })));
   return out.map((o, i) => `${o.src} ${anchos[i]}w`).join(', ');
 };
 const srcH = await srcset(h, [960, 1600, 2400]);
 const srcV = await srcset(v, [640, 1080]);
-const base = h ? await getImage({ src: h, width: Math.min(1600, h.width), format: 'webp' }) : null;
+const base = h ? await getImage({ src: h, width: Math.min(1600, h.width), format: 'webp', quality: 68 }) : null;
 ---
 <header class="barra">
   <div class="barra__in contenedor">

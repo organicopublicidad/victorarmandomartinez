@@ -15,7 +15,7 @@ export const sitio = {
   // Píxel de Meta (conjunto de datos «Web Víctor Armando Martínez»). Se activa solo con el consentimiento del visitante.
   pixelMeta: '933244159644625',
   // Canal para ejercer los derechos de habeas data (política de datos)
-  contactoDatos: 'viarman@msn.com',
+  contactoDatos: 'hola@victorarmandomartinez.com',
 };
 
 export const nav = [

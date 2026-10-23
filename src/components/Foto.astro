@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import { foto } from '../lib/medios';
+
+interface Props {
+  clave: string;
+  alt: string;
+  // Texto que se ve mientras llega la foto real
+  pendiente?: string;
+  ratio?: string;
+  widths?: number[];
+  sizes?: string;
+  eager?: boolean;
+  bn?: boolean;
+  class?: string;
+}
+
+const { clave, alt, pendiente, ratio = '3 / 2', widths = [480, 800, 1200, 1600], sizes = '(min-width: 900px) 50vw, 100vw', eager = false, bn = false, class: cls = '' } = Astro.props;
+const src = foto(clave);
+---
+
+{src ? (
+  <Image
+    src={src}
+    alt={alt}
+    widths={widths.filter((w) => w <= src.width)}
+    sizes={sizes}
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : 'auto'}
+    class:list={['foto', cls, { bn }]}
+    style={`aspect-ratio:${ratio}`}
+  />
+) : (
+  <div class:list={['foto foto--pendiente', cls]} style={`aspect-ratio:${ratio}`} role="img" aria-label={alt}>
+    <span>{pendiente ?? alt}</span>
+  </div>
+)}
+
+<style>
+  .foto { display: block; width: 100%; height: auto; object-fit: cover; }
+  .bn { filter: grayscale(1) contrast(1.05); }
+  .foto--pendiente {
+    display: grid; place-items: center; padding: 1rem; text-align: center;
+    background:
+      repeating-linear-gradient(135deg, rgb(0 0 0 / 0.035) 0 12px, transparent 12px 24px),
+      linear-gradient(160deg, var(--arena), var(--arena-2));
+    color: var(--tinta-suave); font: 500 0.85rem/1.35 var(--sans);
+  }
+  .foto--pendiente span { max-width: 26ch; border: 1px dashed currentColor; padding: 0.5rem 0.75rem; border-radius: 6px; }
+</style>

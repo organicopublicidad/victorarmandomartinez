@@ -1,0 +1,13 @@
+---
+// Franja de colores: la firma visual de la página (unión)
+interface Props { alto?: string; class?: string }
+const { alto = '10px', class: cls = '' } = Astro.props;
+---
+<div class:list={['tejido', cls]} style={`height:${alto}`} aria-hidden="true"></div>
+
+<style>
+  .tejido {
+    width: 100%;
+    background: linear-gradient(90deg, var(--azul) 0 33.33%, var(--ambar) 0 66.66%, var(--rojo) 0);
+  }
+</style>

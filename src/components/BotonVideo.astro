@@ -1,0 +1,28 @@
+---
+import Icono from './Icono.astro';
+import { video } from '../lib/medios';
+
+// Prioridad: video propio en src/assets/videos/<clave>.mp4; si falta, el de YouTube
+interface Props { clave: string; etiqueta: string; youtube?: string; claro?: boolean; class?: string }
+const { clave, etiqueta, youtube, claro = false, class: cls = '' } = Astro.props;
+const url = video(clave);
+---
+{(url || youtube) && (
+  <button type="button" class:list={['boton-video', cls, { claro }]} data-video={url} data-youtube={url ? undefined : youtube} data-titulo={etiqueta}>
+    <Icono nombre="play" size={24} />
+    <span>{etiqueta}</span>
+  </button>
+)}
+
+<style>
+  .boton-video {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    padding: 0.75rem 1.2rem 0.65rem 0.9rem;
+    border: 0; background: var(--rojo); color: #fff;
+    font: 400 1.3rem/1 var(--display); letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+  }
+  .boton-video:hover { background: var(--negro); transform: translateY(-2px); }
+  .boton-video.claro { background: var(--ambar); color: var(--negro); }
+  .boton-video.claro:hover { background: #fff; }
+</style>

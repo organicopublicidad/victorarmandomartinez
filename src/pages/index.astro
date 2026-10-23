@@ -1,0 +1,295 @@
+---
+import Base from '../layouts/Base.astro';
+import Portada from '../components/Portada.astro';
+import Foto from '../components/Foto.astro';
+import Icono from '../components/Icono.astro';
+import Tejido from '../components/Tejido.astro';
+import BotonVideo from '../components/BotonVideo.astro';
+import { raices, popayan, trayectoria, construido, mueve, cierre } from '../data/contenido';
+import { video } from '../lib/medios';
+
+const coloresFicha = ['var(--azul)', 'var(--rojo)', 'var(--ambar)', 'var(--negro)', 'var(--azul-hondo)'];
+const redes = cierre.redes.filter((r) => r.url);
+---
+<Base>
+  <Portada />
+
+  <main>
+    <!-- 1 · Sus raíces -->
+    <section id="raices" class="seccion raices">
+      <div class="contenedor raices__grid">
+        <div class="raices__fotos revela">
+          <Foto clave="raices-abuela" bn ratio="4 / 5" sizes="(min-width: 900px) 45vw, 100vw" alt="Foto de archivo familiar: la abuela y la casa de El Rosal" pendiente="Foto pendiente: raices-abuela.jpg — archivo familiar en blanco y negro (4:5)" />
+          <Foto clave="raices-el-rosal" class="raices__mini" ratio="3 / 2" widths={[480, 800]} sizes="(min-width: 900px) 22vw, 50vw" alt="El Rosal hoy: el paisaje del Macizo Colombiano" pendiente="raices-el-rosal.jpg (3:2)" />
+        </div>
+        <div class="raices__texto revela">
+          <span class="numero">{raices.numero}</span>
+          <h2 class="titulo">{raices.titulo}</h2>
+          <p class="cita cita--azul">{raices.frase}</p>
+          <p class="cuerpo">{raices.texto}</p>
+          <p class="remate">{raices.cierre}</p>
+          <BotonVideo {...raices.video} />
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · Popayán, su casa -->
+    <section id="popayan" class="popayan">
+      <div class="seccion contenedor">
+        <div class="popayan__grid">
+          <div class="revela">
+            <span class="numero">{popayan.numero}</span>
+            <h2 class="titulo">{popayan.titulo}</h2>
+            <p class="cuerpo">{popayan.texto}</p>
+          </div>
+          <Foto clave="popayan" class="popayan__foto revela" ratio="16 / 9" sizes="(min-width: 900px) 55vw, 100vw" alt="Víctor Armando en el centro histórico de Popayán" pendiente="Foto pendiente: popayan.jpg — él en el centro histórico (16:9)" />
+        </div>
+        <ol class="hitos">
+          {popayan.hitos.map((h, i) => (
+            <li class="hito revela">
+              <Foto clave={h.foto} ratio="1 / 1" widths={[320, 640]} sizes="(min-width: 900px) 30vw, 100vw" alt={h.texto} pendiente={`${h.foto}.jpg (1:1)`} />
+              <div class="hito__txt"><span class="hito__n">{i + 1}</span><p>{h.texto}</p></div>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <div class="franja">
+        <p class="cita contenedor revela">{popayan.frase}</p>
+      </div>
+    </section>
+
+    <!-- 3 · Su trayectoria -->
+    <section id="trayectoria" class="seccion trayectoria">
+      <div class="contenedor revela">
+        <span class="numero numero--ambar">{trayectoria.numero}</span>
+        <h2 class="titulo">{trayectoria.titulo}</h2>
+        <p class="entradilla">{trayectoria.entradilla}</p>
+      </div>
+      <div class="linea-wrap">
+        <ol class="linea" tabindex="0" aria-label="Línea de tiempo de su trayectoria">
+          {trayectoria.linea.map((p) => (
+            <li class:list={['punto', { 'punto--hito': p.hito }]}>
+              <div class="punto__foto">{p.hito && <Foto clave={p.hito} ratio="1 / 1" widths={[320, 560]} sizes="280px" alt={p.cargo} pendiente={`${p.hito}.jpg (1:1)`} />}</div>
+              <span class="punto__icono"><Icono nombre={p.icono} size={22} /></span>
+              <span class="punto__anio">{p.anio}</span>
+              <span class="punto__cargo">{p.cargo}</span>
+              <span class="punto__lugar">{p.lugar}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <p class="contenedor desliza" aria-hidden="true">Desliza para recorrerla →</p>
+    </section>
+
+    <!-- 4 · Lo que ha construido -->
+    <section id="construido" class="seccion construido">
+      <div class="contenedor">
+        <div class="revela">
+          <span class="numero">{construido.numero}</span>
+          <h2 class="titulo">{construido.titulo}</h2>
+          <p class="entradilla">{construido.entradilla}</p>
+        </div>
+        <ul class="obras">
+          {construido.tarjetas.map((t) => {
+            const v = video(t.clave);
+            const yt = v ? undefined : t.youtube;
+            const conVideo = Boolean(v || yt);
+            const Tag = conVideo ? 'button' : 'div';
+            return (
+              <li class="revela">
+                <Tag class="obra" type={conVideo ? 'button' : undefined} data-video={v} data-youtube={yt} data-titulo={t.titulo}>
+                  <Foto clave={t.clave} ratio="3 / 2" widths={[480, 800]} sizes="(min-width: 900px) 33vw, 50vw" alt={t.titulo} pendiente={`${t.clave}.jpg (3:2)`} />
+                  <span class="obra__titulo">{t.titulo}</span>
+                  <span class="obra__texto">{t.texto}</span>
+                  {conVideo && <span class="obra__ver"><Icono nombre="play" size={18} /> Ver testimonio</span>}
+                </Tag>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </section>
+
+    <!-- 5 · Lo que lo mueve -->
+    <section id="mueve" class="seccion mueve">
+      <div class="contenedor">
+        <div class="revela">
+          <span class="numero numero--azul">{mueve.numero}</span>
+          <h2 class="titulo">{mueve.titulo}</h2>
+        </div>
+        <ul class="amores">
+          {mueve.amores.map((a) => (
+            <li class="revela">
+              <Foto clave={a.clave} ratio="4 / 5" widths={[400, 720]} sizes="(min-width: 900px) 33vw, 100vw" alt={a.titulo} pendiente={`${a.clave}.jpg (4:5)`} />
+              <h3>{a.titulo}</h3>
+              <p>{a.texto}</p>
+            </li>
+          ))}
+        </ul>
+        <h3 class="conv__titulo revela">Sus convicciones</h3>
+        <ul class="fichas revela">
+          {mueve.convicciones.map((c, i) => <li style={`--c:${coloresFicha[i % coloresFicha.length]}`}>{c}</li>)}
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- Cierre -->
+  <footer class="cierre">
+    <Foto clave="cierre" class="cierre__img" ratio="auto" widths={[960, 1600, 2400]} sizes="100vw" alt="Víctor Armando compartiendo con la gente en la galería" pendiente=" " />
+    <div class="cierre__velo"></div>
+    <div class="contenedor cierre__in revela">
+      <p class="cierre__frase">{cierre.frase}</p>
+      <p class="firma">— {cierre.firma}</p>
+      <BotonVideo {...cierre.video} claro />
+      {redes.length > 0 && (
+        <ul class="redes">
+          {redes.map((r) => <li><a href={r.url} target="_blank" rel="noopener" aria-label={r.red}><Icono nombre={r.red} size={24} /></a></li>)}
+        </ul>
+      )}
+    </div>
+    <Tejido alto="12px" />
+    <p class="pie contenedor">© {new Date().getFullYear()} Víctor Armando Martínez Perafán</p>
+  </footer>
+
+  <dialog id="visor" aria-label="Video">
+    <button type="button" class="visor__cerrar" aria-label="Cerrar video">×</button>
+    <div class="visor__marco"></div>
+  </dialog>
+
+  <script>
+    const visor = document.getElementById('visor') as HTMLDialogElement;
+    const marco = visor.querySelector('.visor__marco')!;
+    document.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLElement>('[data-video],[data-youtube]');
+      if (!b) return;
+      const { video, youtube, titulo = 'Video' } = b.dataset;
+      marco.innerHTML = video
+        ? `<video src="${video}" controls autoplay playsinline></video>`
+        : `<iframe src="https://www.youtube-nocookie.com/embed/${youtube}?autoplay=1&rel=0" title="${titulo}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+      visor.showModal();
+    });
+    const cerrar = () => { visor.close(); };
+    visor.querySelector('.visor__cerrar')!.addEventListener('click', cerrar);
+    visor.addEventListener('click', (e) => { if (e.target === visor) cerrar(); });
+    visor.addEventListener('close', () => { marco.innerHTML = ''; });
+  </script>
+</Base>
+
+<style>
+  .cuerpo { margin-top: 1.5rem; font-size: 1.15rem; max-width: 52ch; }
+  .remate { margin-top: 1rem; font-weight: 600; font-size: 1.15rem; }
+  .cita--azul { color: var(--azul); margin-top: 1.25rem; }
+  .numero--ambar { background: var(--ambar); color: var(--negro); }
+  .numero--azul { background: var(--azul); }
+
+  /* Raíces */
+  .raices__grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(2rem, 6vw, 5.5rem); align-items: center; }
+  .raices__fotos { position: relative; padding-bottom: 12%; }
+  .raices__fotos :global(.raices__mini) { position: absolute; width: 48%; right: -8%; bottom: 0; border: 8px solid var(--papel); }
+  .raices__texto :global(.boton-video) { margin-top: 2rem; }
+  @media (max-width: 900px) {
+    .raices__grid { grid-template-columns: 1fr; }
+    .raices__fotos :global(.raices__mini) { right: 0; }
+  }
+
+  /* Popayán */
+  .popayan { background: var(--ambar); }
+  .popayan .numero { background: var(--azul); }
+  .popayan__grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+  .hitos { list-style: none; padding: 0; margin: clamp(3rem, 6vw, 4.5rem) 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .hito { background: var(--blanco); }
+  .hito__txt { display: flex; gap: 0.9rem; padding: 1.1rem 1.2rem 1.3rem; align-items: flex-start; }
+  .hito__n { font: 400 2.6rem/0.9 var(--display); color: var(--rojo); }
+  .hito__txt p { font-size: 1rem; line-height: 1.45; }
+  .franja { background: var(--rojo); color: #fff; padding-block: clamp(3rem, 7vw, 5.5rem); }
+  .franja .cita { font-size: clamp(2rem, 5vw, 3.8rem); }
+  @media (max-width: 900px) {
+    .popayan__grid { grid-template-columns: 1fr; }
+    .hitos { grid-template-columns: 1fr; }
+    .hito { display: grid; grid-template-columns: 34% 1fr; }
+  }
+
+  /* Trayectoria */
+  .trayectoria { background: var(--azul); color: #fff; }
+  .trayectoria .entradilla { color: rgb(255 255 255 / 0.85); }
+  .linea-wrap { margin-top: clamp(2.5rem, 5vw, 4rem); overflow-x: auto; scroll-snap-type: x proximity; scrollbar-color: var(--ambar) transparent; scroll-padding-inline: var(--gutter); }
+  .linea { --foto: 200px; list-style: none; margin: 0; display: flex; align-items: flex-start; padding: 0 0 1.5rem; width: max-content; position: relative; }
+  .linea::before { content: ''; flex: 0 0 max(var(--gutter), calc((100vw - var(--ancho)) / 2 + var(--gutter))); }
+  .linea::after { content: ''; position: absolute; left: 0; right: 0; top: calc(var(--foto) + 22px); height: 3px; background: rgb(255 255 255 / 0.35); }
+  .punto { scroll-snap-align: start; flex: 0 0 230px; padding-right: 1.75rem; display: flex; flex-direction: column; position: relative; z-index: 1; }
+  .punto__foto { height: var(--foto); display: flex; align-items: flex-end; padding-bottom: 14px; }
+  .punto__foto :global(.foto) { width: 180px; border: 4px solid var(--ambar); }
+  .punto__icono { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--blanco); color: var(--azul); flex: none; }
+  .punto--hito .punto__icono { background: var(--ambar); color: var(--negro); }
+  .punto__anio { margin-top: 0.9rem; font: 400 1.9rem/1 var(--display); color: var(--ambar); }
+  .punto__cargo { margin-top: 0.45rem; font-weight: 500; line-height: 1.3; }
+  .punto--hito .punto__cargo { font-weight: 600; }
+  .punto__lugar { font-size: 0.9rem; opacity: 0.8; margin-top: 0.35rem; line-height: 1.35; }
+  .desliza { margin-top: 0.75rem; font: 400 1.15rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.08em; color: var(--ambar); }
+  @media (max-width: 760px) {
+    .linea-wrap { overflow: visible; }
+    .linea { flex-direction: column; align-items: stretch; width: auto; padding: 0 var(--gutter); }
+    .linea::before { display: none; }
+    .linea::after { left: calc(var(--gutter) + 21px); right: auto; top: 0; bottom: 0; width: 3px; height: auto; }
+    .punto { flex: none; padding: 0 0 1.75rem 64px; }
+    .punto__icono { position: absolute; left: 0; top: 0; }
+    .punto__anio { margin-top: 0.55rem; }
+    .punto__foto { order: 5; height: auto; padding: 0.75rem 0 0; }
+    .punto__foto:empty { display: none; }
+    .punto__foto :global(.foto) { width: 100%; max-width: 300px; }
+    .desliza { display: none; }
+  }
+
+  /* Lo que ha construido */
+  .obras { list-style: none; padding: 0; margin: clamp(2.5rem, 5vw, 4rem) 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.75rem); }
+  .obras > li { display: flex; }
+  .obra { all: unset; box-sizing: border-box; display: flex; flex-direction: column; width: 100%; background: var(--gris-claro); cursor: default; transition: transform 0.2s, box-shadow 0.2s; }
+  button.obra { cursor: pointer; }
+  button.obra:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ambar); }
+  button.obra:focus-visible { outline: 3px solid var(--rojo); outline-offset: 3px; }
+  .obra__titulo { font: 400 clamp(1.9rem, 3vw, 2.6rem)/0.95 var(--display); text-transform: uppercase; color: var(--azul); padding: 1.2rem 1.2rem 0; }
+  .obra__texto { padding: 0.6rem 1.2rem 1.2rem; font-size: 1rem; line-height: 1.45; flex: 1; }
+  .obra__ver { display: inline-flex; align-items: center; gap: 0.4rem; margin: 0 1.2rem 1.2rem; font: 400 1.1rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.05em; color: var(--rojo); }
+  @media (max-width: 900px) { .obras { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) {
+    .obras { gap: 0.75rem; }
+    .obra__titulo { font-size: 1.6rem; padding: 0.8rem 0.8rem 0; }
+    .obra__texto { padding: 0.45rem 0.8rem 0.8rem; font-size: 0.9rem; }
+    .obra__ver { margin: 0 0.8rem 0.8rem; font-size: 1rem; }
+  }
+
+  /* Lo que lo mueve */
+  .mueve { background: var(--crema); }
+  .amores { list-style: none; padding: 0; margin: clamp(2.5rem, 5vw, 4rem) 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.25rem, 3vw, 2.5rem); }
+  .amores h3 { font-size: 2.6rem; margin-top: 1rem; color: var(--rojo); }
+  .amores p { margin-top: 0.5rem; font-size: 1.05rem; }
+  .conv__titulo { margin-top: clamp(3rem, 6vw, 5rem); font-size: clamp(2.2rem, 4vw, 3.2rem); }
+  .fichas { list-style: none; padding: 0; margin: 1.25rem 0 0; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .fichas li { background: var(--c); color: #fff; font: 400 clamp(1.25rem, 2.2vw, 1.6rem)/1.1 var(--display); text-transform: uppercase; letter-spacing: 0.03em; padding: 0.7rem 1rem 0.6rem; }
+  .fichas li[style*='ambar'] { color: var(--negro); }
+  @media (max-width: 900px) { .amores { grid-template-columns: 1fr; } }
+
+  /* Cierre */
+  .cierre { position: relative; background: var(--negro); color: #fff; overflow: hidden; }
+  .cierre :global(.cierre__img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .cierre :global(.foto--pendiente.cierre__img) { background: linear-gradient(135deg, var(--rojo), #5c0000); }
+  .cierre :global(.foto--pendiente.cierre__img span) { display: none; }
+  .cierre__velo { position: absolute; inset: 0; background: linear-gradient(0deg, rgb(19 17 12 / 0.85), rgb(19 17 12 / 0.45)); }
+  .cierre__in { position: relative; padding-block: clamp(96px, 16vw, 200px) clamp(56px, 8vw, 96px); }
+  .cierre__frase { font: italic 500 clamp(2rem, 4.8vw, 3.9rem)/1.12 var(--serif); max-width: 24ch; }
+  .firma { margin-top: 1.5rem; font: 400 clamp(2.4rem, 5vw, 3.6rem)/1 var(--display); text-transform: uppercase; color: var(--ambar); }
+  .cierre :global(.boton-video) { margin-top: 2rem; }
+  .redes { list-style: none; padding: 0; margin: 2rem 0 0; display: flex; gap: 0.75rem; }
+  .redes a { display: grid; place-items: center; width: 48px; height: 48px; background: #fff; color: var(--azul); transition: background 0.2s; }
+  .redes a:hover { background: var(--ambar); }
+  .cierre > :global(.tejido) { position: relative; }
+  .pie { position: relative; padding-block: 1.1rem; font-size: 0.85rem; opacity: 0.75; }
+
+  /* Visor de video */
+  #visor { padding: 0; border: 0; background: transparent; width: min(1100px, 94vw); max-width: none; overflow: visible; }
+  #visor::backdrop { background: rgb(19 17 12 / 0.88); }
+  .visor__marco { aspect-ratio: 16 / 9; background: #000; }
+  .visor__marco :global(iframe), .visor__marco :global(video) { width: 100%; height: 100%; border: 0; }
+  .visor__cerrar { position: absolute; top: -48px; right: 0; width: 42px; height: 42px; border: 0; background: var(--ambar); color: var(--negro); font: 400 2rem/1 var(--display); cursor: pointer; }
+</style>

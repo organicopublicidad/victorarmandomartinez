@@ -126,7 +126,7 @@ const base = h ? await getImage({ src: h, width: Math.min(1600, h.width), format
   :global(html.sin-scroll) { overflow: hidden; }
 
   .portada { position: relative; min-height: calc(100svh - 80px); display: grid; grid-template-rows: 1fr auto; color: #fff; overflow: hidden; background: var(--azul-hondo); }
-  .portada__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 30%; }
+  .portada__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 12%; }
   .portada__img--pendiente { display: grid; place-items: start end; padding: 2rem; background: linear-gradient(120deg, var(--azul-hondo), var(--azul)); }
   .portada__img--pendiente span { border: 1px dashed rgb(255 255 255 / 0.6); padding: 0.6rem 0.9rem; font-size: 0.9rem; max-width: 30ch; }
   .portada__velo { position: absolute; inset: 0; background: linear-gradient(90deg, rgb(19 17 12 / 0.78) 0%, rgb(19 17 12 / 0.35) 55%, transparent 80%), linear-gradient(0deg, rgb(19 17 12 / 0.55), transparent 40%); }

@@ -4,6 +4,9 @@
 // Video provisional mientras llegan los videos reales (YouTube: Popayán desde el aire)
 const DEMO = 'vRvxdm0PqM0';
 
+// Botones de video y testimonios: se activan (true) cuando los videos reales estén producidos
+export const videosActivos = false;
+
 export const sitio = {
   url: 'https://victorarmandomartinez.com',
   titulo: 'Víctor Armando Martínez Perafán · Hoja de vida',
@@ -26,7 +29,8 @@ export const portada = {
   credenciales: [
     'Ingeniero Agroindustrial',
     'Especialista en Gerencia de Proyectos',
-    'Maestría (e) en Construcción de Paz',
+    'Especialista en Construcción de Paz',
+    'Especialista (e) en Alta Gerencia',
   ],
   datos: [
     { icono: 'lugar', texto: 'Nacido en El Rosal, San Sebastián, Cauca' },
@@ -53,7 +57,7 @@ export const popayan = {
   hitos: [
     { foto: 'hito-ulloa', texto: 'Bachiller del Colegio Francisco Antonio de Ulloa, donde se destacó por su liderazgo estudiantil.' },
     { foto: 'hito-militar', texto: 'Servicio militar: subteniente de la reserva.' },
-    { foto: 'hito-unicauca', texto: 'Ingeniero Agroindustrial de la Universidad del Cauca, del primer grupo de egresados del programa. Entró en el primer intento.' },
+    { foto: 'hito-unicauca', texto: 'Ingeniero Agroindustrial de la Universidad del Cauca, del primer grupo de egresados del programa.' },
   ],
   frase: '«Popayán nos recibió y nos dio con generosidad».',
 };
@@ -63,7 +67,7 @@ export type Icono = 'aula' | 'campo' | 'obra' | 'alcaldia' | 'industria' | 'terr
 export const trayectoria = {
   numero: 'Tres',
   titulo: 'Su trayectoria',
-  entradilla: '24 años de servicio: del aula de su pueblo a una agencia de la Presidencia de la República.',
+  entradilla: '24 años al servicio de Popayán y el Cauca.',
   linea: [
     { anio: '2002', cargo: 'Docente de ciencias', lugar: 'I.E. Nuestra Señora del Rosario, San Sebastián', icono: 'aula' },
     { anio: '2003', cargo: 'Coordinador de la UMATA', lugar: 'San Sebastián', icono: 'campo' },

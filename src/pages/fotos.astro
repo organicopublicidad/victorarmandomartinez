@@ -66,20 +66,33 @@ const bloques: { titulo: string; ancla: string; piezas: Pieza[] }[] = [
   },
 ];
 const total = bloques.reduce((n, b) => n + b.piezas.length, 0);
+
+// Videos por producir: al tenerlos, se activan sus botones en la página
+type Video = { codigo: string; titulo: string; donde: string; ancla: string; duracion: string; que: string };
+const videos: Video[] = [
+  { codigo: 'nadie-llega-solo', titulo: '«Nadie llega solo»', donde: 'Uno · Sus raíces', ancla: 'raices', duracion: '60–90 s', que: 'Los hermanos de Víctor Armando cuentan la cadena de apoyo de la familia: los mayores estudiaron primero y ayudaron a los que venían detrás. Hablan de la abuela y de su negocio de empanadas. Es la pieza ancla del Plan de Contenidos.' },
+  { codigo: 'obra-cafe', titulo: 'Testimonio · 200 parcelas cafeteras', donde: 'Cuatro · Lo que ha construido', ancla: 'construido', duracion: '30–60 s', que: 'Un caficultor de El Rosal o Paramillo cuenta cómo cambió su vida desde que su parcela produce café.' },
+  { codigo: 'obra-vivero', titulo: 'Testimonio · El primer vivero municipal', donde: 'Cuatro · Lo que ha construido', ancla: 'construido', duracion: '30–60 s', que: 'Quien trabaja hoy en el vivero de San Sebastián muestra las plantas y cuenta para qué sirven a las cuencas y al agua.' },
+  { codigo: 'obra-terneras', titulo: 'Testimonio · 630 terneras', donde: 'Cuatro · Lo que ha construido', ancla: 'construido', duracion: '30–60 s', que: 'Una familia campesina cuenta qué significó recibir su primera vaca y cómo creció su ganado.' },
+  { codigo: 'obra-casa-paso', titulo: 'Testimonio · La casa de paso', donde: 'Cuatro · Lo que ha construido', ancla: 'construido', duracion: '30–60 s', que: 'Una persona que se alojó en la casa de paso cuenta su viaje desde el campo a una cita médica en Popayán.' },
+  { codigo: 'obra-monde', titulo: 'Testimonio · Monde Selection 2011', donde: 'Cuatro · Lo que ha construido', ancla: 'construido', duracion: '30–60 s', que: 'Un trabajador o trabajadora de la Licorera del Cauca recuerda el primer premio internacional del aguardiente caucano.' },
+  { codigo: 'obra-art', titulo: 'Testimonio · 24 municipios', donde: 'Cuatro · Lo que ha construido', ancla: 'construido', duracion: '30–60 s', que: 'Un líder o lideresa comunitaria de un municipio PDET muestra la obra que hoy usa su comunidad.' },
+  { codigo: 'quien-es', titulo: '«¿Quién es Víctor Armando?»', donde: 'Cierre', ancla: 'cierre', duracion: '60–90 s', que: 'Montaje de testimonios de terceros: familia, vecinos, compañeros de trabajo y comunidad cuentan quién es él. Pieza ancla del Plan de Contenidos.' },
+];
 let n = 0;
 ---
-<Base titulo="Guía de fotos · Víctor Armando">
+<Base titulo="Guía de fotos y videos · Víctor Armando">
   <header class="cabeza">
     <div class="contenedor">
-      <p class="sello">Guía de fotos</p>
-      <h1>Fotos originales para la página</h1>
+      <p class="sello">Guía de producción</p>
+      <h1>Fotos y videos para la página</h1>
       <p class="intro">
         Cada imagen de esta guía es una <strong>foto de maqueta</strong> hecha con inteligencia artificial para armar el diseño.
         Para cada una buscamos la <strong>foto original</strong> de Víctor Armando que la reemplaza: mismo momento, mismo formato.
       </p>
       <ol class="pasos">
-        <li>Busca la foto original que corresponde a cada número ({total} en total).</li>
-        <li>Nombra el archivo con el código en amarillo, por ejemplo <code>hito-alcalde.jpg</code>.</li>
+        <li>Primero, los videos prioritarios. Luego, la foto original que corresponde a cada número ({total} en total).</li>
+        <li>Nombra cada archivo con su código en amarillo, por ejemplo <code>hito-alcalde.jpg</code> o <code>nadie-llega-solo.mp4</code>.</li>
         <li>Entrega el archivo en la mejor resolución disponible. Las fotos de archivo (marcadas «Archivo») van escaneadas a 300 dpi.</li>
       </ol>
       <a class="ver" href={base}>Ver la página completa →</a>
@@ -88,6 +101,30 @@ let n = 0;
   <Tejido alto="10px" />
 
   <main class="contenedor">
+    <section class="bloque">
+      <p class="prioridad">Prioridad</p>
+      <h2>Videos por producir</h2>
+      <p class="nota">
+        Cada video se suma a la página en cuanto esté listo: aparece su botón para verlo.
+        Entrega: video horizontal 16:9 en 1080p (MP4), subtítulos en español y una versión vertical 9:16 para redes.
+        Cada testimonio cuenta la vida de la persona en su propia voz, y cada cifra va con su soporte documental.
+        Se puede entregar el archivo o el enlace de YouTube (oculto).
+      </p>
+      <ul class="videos">
+        {videos.map((v, i) => (
+          <li class="video">
+            <span class="video__n">V{i + 1}</span>
+            <div>
+              <p class="codigo"><code>{v.codigo}.mp4</code><span class="tag">{v.duracion}</span></p>
+              <h3>{v.titulo}</h3>
+              <p class="que">{v.que}</p>
+              <p class="formato">Va en: <a href={`${base}#${v.ancla}`}>{v.donde}</a></p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
     {bloques.map((b) => (
       <section class="bloque">
         <h2><a href={`${base}#${b.ancla}`}>{b.titulo}</a></h2>
@@ -143,6 +180,13 @@ let n = 0;
   .que { font-size: 1rem; line-height: 1.45; }
   .formato { font-size: 0.9rem; color: var(--gris); }
 
+  .prioridad { display: inline-block; background: var(--rojo); color: #fff; font: 400 1.15rem/1 var(--display); letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 0.7rem 0.3rem; margin-bottom: 0.9rem; }
+  .nota { margin-top: 1rem; max-width: 70ch; }
+  .videos { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
+  .video { display: grid; grid-template-columns: auto 1fr; gap: 1rem; background: var(--crema); padding: 1.1rem 1.2rem 1.2rem; border-left: 6px solid var(--rojo); }
+  .video__n { font: 400 2.4rem/0.9 var(--display); color: var(--rojo); }
+  .video h3 { font-size: 1.7rem; margin: 0.6rem 0 0.4rem; color: var(--azul); }
+  .video .que { margin-bottom: 0.5rem; }
   .pie { margin-top: clamp(64px, 9vw, 112px); background: var(--negro); color: #fff; }
   .pie p { padding-block: 1.1rem; font-size: 0.85rem; opacity: 0.8; }
 </style>

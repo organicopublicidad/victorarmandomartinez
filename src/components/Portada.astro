@@ -1,7 +1,9 @@
 ---
 import type { ImageMetadata } from 'astro';
-import { getImage } from 'astro:assets';
+import { getImage, Image } from 'astro:assets';
 import { portada, nav } from '../data/contenido';
+import logoApilado from '../assets/logo/logo-apilado.png';
+import logoHorizontal from '../assets/logo/logo-horizontal.png';
 import { foto } from '../lib/medios';
 import Icono from './Icono.astro';
 
@@ -16,11 +18,12 @@ const srcset = async (img: ImageMetadata | undefined, anchos: number[]) => {
 const srcH = await srcset(h, [960, 1600, 2400]);
 const srcV = await srcset(v, [640, 1080]);
 const base = h ? await getImage({ src: h, width: Math.min(1600, h.width), format: 'webp' }) : null;
-const [nombre1, ...resto] = portada.nombre.split(' ');
 ---
 <header class="barra">
   <div class="barra__in contenedor">
-    <a href="#inicio" class="marca">Víctor Armando</a>
+    <a href="#inicio" class="marca" aria-label="Inicio">
+      <Image src={logoHorizontal} alt={portada.nombre} widths={[200, 400]} sizes="170px" loading="eager" class="marca__logo" />
+    </a>
     <nav aria-label="Secciones">
       <ul>
         {nav.map((n) => <li><a href={`#${n.id}`}>{n.texto}</a></li>)}
@@ -46,8 +49,7 @@ const [nombre1, ...resto] = portada.nombre.split(' ');
   <div class="portada__texto contenedor">
     <p class="rotulo">{portada.rotulo}</p>
     <h1>
-      <span class="n1">{nombre1} {resto[0]}</span>
-      <span class="n2">{resto.slice(1).join(' ')}</span>
+      <Image src={logoApilado} alt={portada.nombre} widths={[400, 800, 1200]} sizes="(min-width: 760px) 560px, 82vw" loading="eager" fetchpriority="high" class="logo-portada" />
     </h1>
     <p class="frase">{portada.frase}</p>
     <p class="credenciales">{portada.credenciales.join(' · ')}</p>
@@ -63,7 +65,8 @@ const [nombre1, ...resto] = portada.nombre.split(' ');
 <style>
   .barra { position: sticky; top: 0; z-index: 50; background: var(--azul); color: #fff; }
   .barra__in { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 60px; }
-  .marca { font: 400 1.9rem/1 var(--display); text-transform: uppercase; color: var(--ambar); text-decoration: none; letter-spacing: 0.02em; white-space: nowrap; padding-top: 4px; }
+  .marca { display: block; flex: none; line-height: 0; }
+  .marca :global(.marca__logo) { width: 170px; height: auto; }
   .barra ul { display: flex; gap: 1.6rem; list-style: none; margin: 0; padding: 0; }
   .barra nav a { font: 400 1.25rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; white-space: nowrap; }
   .barra nav a:hover { color: var(--ambar); }
@@ -72,7 +75,7 @@ const [nombre1, ...resto] = portada.nombre.split(' ');
     .barra nav { overflow-x: auto; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); }
     .barra nav::-webkit-scrollbar { display: none; }
     .barra ul { gap: 1.25rem; padding-block: 0.55rem 0.6rem; }
-    .marca { font-size: 1.6rem; }
+    .marca :global(.marca__logo) { width: 140px; }
   }
 
   .portada { position: relative; min-height: calc(100svh - 60px); display: grid; grid-template-rows: 1fr auto; color: #fff; overflow: hidden; background: var(--azul-hondo); }
@@ -82,9 +85,8 @@ const [nombre1, ...resto] = portada.nombre.split(' ');
   .portada__velo { position: absolute; inset: 0; background: linear-gradient(90deg, rgb(19 17 12 / 0.78) 0%, rgb(19 17 12 / 0.35) 55%, transparent 80%), linear-gradient(0deg, rgb(19 17 12 / 0.55), transparent 40%); }
   .portada__texto { position: relative; align-self: end; padding-block: 18vh 2.5rem; }
   .rotulo { display: inline-block; background: var(--ambar); color: var(--negro); font: 400 1.25rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.12em; padding: 0.45rem 0.75rem 0.35rem; }
-  h1 { margin-top: 1rem; font-size: clamp(4rem, 12vw, 10.5rem); line-height: 0.86; }
-  h1 span { display: block; }
-  .n2 { color: var(--ambar); }
+  h1 { margin-top: 1.4rem; line-height: 0; }
+  h1 :global(.logo-portada) { width: clamp(260px, 44vw, 560px); height: auto; filter: drop-shadow(0 2px 14px rgb(19 17 12 / 0.35)); }
   .frase { margin-top: 1.4rem; font: italic 500 clamp(1.4rem, 2.8vw, 2.1rem)/1.2 var(--serif); max-width: 24ch; }
   .credenciales { margin-top: 1rem; font-size: clamp(0.95rem, 1.4vw, 1.1rem); opacity: 0.92; max-width: 60ch; }
 

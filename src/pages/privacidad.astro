@@ -1,0 +1,116 @@
+---
+// Política de tratamiento de datos personales y cookies (Ley 1581 de 2012 y Decreto 1074 de 2015)
+import Base from '../layouts/Base.astro';
+import Tejido from '../components/Tejido.astro';
+import { sitio, portada } from '../data/contenido';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const actualizada = '23 de octubre de 2026';
+---
+<Base titulo="Política de tratamiento de datos · Víctor Armando">
+  <header class="cabeza">
+    <div class="contenedor">
+      <p class="sello">Habeas data</p>
+      <h1>Política de tratamiento de datos personales</h1>
+      <p class="fecha">Última actualización: {actualizada}</p>
+    </div>
+  </header>
+  <Tejido alto="10px" />
+
+  <main class="contenedor texto">
+    <section>
+      <h2>1. Responsable</h2>
+      <p>
+        <strong>{portada.nombre}</strong>, como titular del sitio web <a href={base}>de su hoja de vida</a>,
+        es responsable del tratamiento de los datos personales recolectados a través de este sitio.
+        Canal de atención: <a href={`mailto:${sitio.contactoDatos}`}>{sitio.contactoDatos}</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2>2. Datos que se recolectan</h2>
+      <p>Cuando el visitante acepta las cookies, el sitio registra datos de navegación mediante el píxel de Meta:</p>
+      <ul>
+        <li>Páginas y secciones visitadas, fecha y hora de la visita.</li>
+        <li>Tipo de dispositivo, navegador y ubicación aproximada.</li>
+        <li>Identificadores de cookies asociados a Facebook e Instagram.</li>
+      </ul>
+      <p>
+        Las personas que escriben por WhatsApp, Facebook o Instagram comparten además su nombre, número
+        y el contenido de su mensaje, que se usan para responderles.
+      </p>
+    </section>
+
+    <section>
+      <h2>3. Finalidades</h2>
+      <ul>
+        <li>Medir cuántas personas visitan el sitio y qué contenidos les interesan.</li>
+        <li>Mostrar publicaciones y anuncios de Víctor Armando a personas interesadas en su historia, en Facebook e Instagram.</li>
+        <li>Responder los mensajes y conversaciones que las personas inician.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. Autorización y cookies</h2>
+      <p>
+        El píxel de Meta se activa solo cuando el visitante elige <strong>«Aceptar»</strong> en el aviso de cookies.
+        Con <strong>«Solo las necesarias»</strong> el sitio funciona completo y el píxel permanece inactivo.
+        La decisión se puede cambiar en cualquier momento desde el enlace{' '}
+        <a href="#" data-configurar-cookies>Configurar cookies</a>, al pie de la página.
+      </p>
+    </section>
+
+    <section>
+      <h2>5. Derechos del titular</h2>
+      <p>Toda persona titular de datos puede:</p>
+      <ul>
+        <li>Conocer, actualizar y rectificar sus datos.</li>
+        <li>Solicitar prueba de la autorización otorgada.</li>
+        <li>Ser informada sobre el uso dado a sus datos.</li>
+        <li>Revocar la autorización y solicitar la supresión de sus datos.</li>
+        <li>Presentar quejas ante la Superintendencia de Industria y Comercio.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>6. Cómo ejercer los derechos</h2>
+      <p>
+        Las consultas y reclamos se envían a <a href={`mailto:${sitio.contactoDatos}`}>{sitio.contactoDatos}</a>,
+        con nombre, documento de identidad y descripción de la solicitud.
+        Las consultas se atienden en un máximo de diez (10) días hábiles y los reclamos en quince (15) días hábiles,
+        conforme a los artículos 14 y 15 de la Ley 1581 de 2012.
+      </p>
+    </section>
+
+    <section>
+      <h2>7. Vigencia</h2>
+      <p>
+        Esta política rige desde su publicación. Los datos se conservan mientras sean necesarios para las
+        finalidades descritas o mientras el titular mantenga su autorización.
+      </p>
+    </section>
+
+    <p class="volver"><a href={base}>← Volver a la página</a></p>
+  </main>
+
+  <footer class="pie">
+    <Tejido alto="8px" />
+    <p class="contenedor">© {new Date().getFullYear()} {portada.nombre}</p>
+  </footer>
+</Base>
+
+<style>
+  .cabeza { background: var(--rojo); color: #fff; padding-block: clamp(48px, 8vw, 88px) clamp(32px, 5vw, 56px); }
+  .sello { display: inline-block; background: var(--ambar); color: var(--negro); font: 400 1.2rem/1 var(--display); letter-spacing: 0.12em; text-transform: uppercase; padding: 0.45rem 0.75rem 0.35rem; }
+  h1 { font-size: clamp(2.6rem, 7vw, 5rem); margin-top: 1rem; max-width: 18ch; }
+  .fecha { margin-top: 1rem; opacity: 0.85; }
+  .texto { max-width: 760px; padding-block: clamp(40px, 6vw, 72px); }
+  .texto section + section { margin-top: 2.2rem; }
+  .texto h2 { font-size: clamp(1.8rem, 3.4vw, 2.4rem); color: var(--rojo); margin-bottom: 0.6rem; }
+  .texto p + p, .texto ul + p { margin-top: 0.8rem; }
+  .texto ul { margin: 0.6rem 0 0; padding-left: 1.3rem; display: grid; gap: 0.35rem; }
+  .texto a { color: var(--azul); }
+  .volver { margin-top: 3rem; font: 400 1.3rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.05em; }
+  .pie { background: var(--negro); color: #fff; }
+  .pie p { padding-block: 1.1rem; font-size: 0.85rem; opacity: 0.8; }
+</style>

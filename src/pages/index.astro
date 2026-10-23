@@ -150,7 +150,7 @@ const redes = cierre.redes.filter((r) => r.url);
       )}
     </div>
     <Tejido alto="12px" />
-    <p class="pie contenedor">© {new Date().getFullYear()} Víctor Armando Martínez Perafán</p>
+    <p class="pie contenedor">© {new Date().getFullYear()} Víctor Armando Martínez Perafán · <a href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}privacidad/`}>Política de datos</a> · <a href="#" data-configurar-cookies>Configurar cookies</a></p>
   </footer>
 
   <dialog id="visor" aria-label="Video">
@@ -294,6 +294,7 @@ const redes = cierre.redes.filter((r) => r.url);
   .redes a:hover { background: var(--ambar); }
   .cierre > :global(.tejido) { position: relative; }
   .pie { position: relative; padding-block: 1.1rem; font-size: 0.85rem; opacity: 0.75; }
+  .pie a { color: inherit; }
 
   /* Visor de video */
   #visor { padding: 0; border: 0; background: transparent; width: min(1100px, 94vw); max-width: none; overflow: visible; }

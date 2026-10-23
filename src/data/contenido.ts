@@ -12,6 +12,10 @@ export const sitio = {
   titulo: 'Víctor Armando Martínez Perafán · Hoja de vida',
   descripcion:
     'Víctor Armando Martínez Perafán: un hijo del Macizo que hizo de Popayán su casa. Sus raíces en El Rosal, su vida en Popayán desde 1991 y 24 años al servicio de Popayán y el Cauca.',
+  // Píxel de Meta (conjunto de datos «Web Víctor Armando Martínez»). Se activa solo con el consentimiento del visitante.
+  pixelMeta: '933244159644625',
+  // Canal para ejercer los derechos de habeas data (política de datos)
+  contactoDatos: 'viarman@msn.com',
 };
 
 export const nav = [

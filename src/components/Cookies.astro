@@ -1,0 +1,63 @@
+---
+// Aviso de cookies: el píxel de Meta se carga solo cuando el visitante acepta (Ley 1581 de 2012)
+import { sitio } from '../data/contenido';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+<div class="cookies" id="cookies" role="dialog" aria-live="polite" aria-label="Uso de cookies" hidden>
+  <p>
+    Usamos cookies para medir las visitas y mostrar el contenido de Víctor Armando a quienes les interesa.
+    Conoce cómo cuidamos tus datos en la <a href={`${base}privacidad/`}>política de tratamiento de datos</a>.
+  </p>
+  <div class="cookies__botones">
+    <button type="button" data-consentimiento="no">Solo las necesarias</button>
+    <button type="button" data-consentimiento="si" class="cookies__si">Aceptar</button>
+  </div>
+</div>
+
+<script define:vars={{ pixel: sitio.pixelMeta }}>
+  const CLAVE = 'vamp-cookies';
+  const leer = () => { try { return localStorage.getItem(CLAVE); } catch { return null; } };
+  const guardar = (v) => { try { localStorage.setItem(CLAVE, v); } catch {} };
+  const aviso = document.getElementById('cookies');
+
+  const cargarPixel = () => {
+    if (!pixel || window.fbq) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    window.fbq('init', pixel);
+    window.fbq('track', 'PageView');
+  };
+
+  const decision = leer();
+  if (decision === 'si') cargarPixel();
+  else if (decision !== 'no') aviso.hidden = false;
+
+  aviso.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-consentimiento]');
+    if (!b) return;
+    guardar(b.dataset.consentimiento);
+    aviso.hidden = true;
+    if (b.dataset.consentimiento === 'si') cargarPixel();
+  });
+
+  // Enlace «Configurar cookies» del pie de página
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('[data-configurar-cookies]')) { e.preventDefault(); aviso.hidden = false; }
+  });
+</script>
+
+<style>
+  .cookies {
+    position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 60; max-width: 560px;
+    background: var(--negro); color: #fff; padding: 1.1rem 1.2rem; box-shadow: 0 10px 40px rgb(0 0 0 / 0.35);
+    border-top: 5px solid var(--ambar); font-size: 0.95rem; line-height: 1.5;
+  }
+  .cookies[hidden] { display: none; }
+  .cookies a { color: var(--ambar); }
+  .cookies__botones { display: flex; gap: 0.6rem; margin-top: 0.9rem; flex-wrap: wrap; justify-content: flex-end; }
+  .cookies button {
+    border: 1.5px solid rgb(255 255 255 / 0.6); background: transparent; color: #fff; cursor: pointer;
+    font: 400 1.15rem/1 var(--display); letter-spacing: 0.05em; text-transform: uppercase; padding: 0.6rem 1rem 0.5rem;
+  }
+  .cookies .cookies__si { background: var(--ambar); border-color: var(--ambar); color: var(--negro); }
+  .cookies button:hover { filter: brightness(1.1); }
+</style>

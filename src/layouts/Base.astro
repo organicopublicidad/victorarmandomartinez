@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { sitio, portada } from '../data/contenido';
 import { foto } from '../lib/medios';
 import { getImage } from 'astro:assets';
+import Cookies from '../components/Cookies.astro';
 
 interface Props { titulo?: string }
 const { titulo = sitio.titulo } = Astro.props;
@@ -61,6 +62,7 @@ const persona = {
   </head>
   <body>
     <slot />
+    <Cookies />
     <script>
       // Aparición al hacer scroll
       const io = new IntersectionObserver((entradas) => {

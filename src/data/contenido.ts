@@ -11,7 +11,7 @@ export const sitio = {
   url: 'https://victorarmandomartinez.com',
   titulo: 'Víctor Armando Martínez Perafán · Hoja de vida',
   descripcion:
-    'Víctor Armando Martínez Perafán: una vida al servicio del Cauca y su gente. Sus raíces en El Rosal, su casa en Popayán desde 1991 y 24 años de trayectoria.',
+    'Víctor Armando Martínez Perafán: un hijo del Macizo que hizo de Popayán su casa. Sus raíces en El Rosal, su vida en Popayán desde 1991 y 24 años al servicio de Popayán y el Cauca.',
 };
 
 export const nav = [
@@ -25,7 +25,7 @@ export const nav = [
 export const portada = {
   rotulo: 'Hoja de vida',
   nombre: 'Víctor Armando Martínez Perafán',
-  frase: 'Una vida al servicio del Cauca y su gente.',
+  frase: 'Un hijo del Macizo que hizo de Popayán su casa.',
   credenciales: [
     'Ingeniero Agroindustrial',
     'Especialista en Gerencia de Proyectos',

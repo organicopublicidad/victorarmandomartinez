@@ -59,7 +59,7 @@ export const popayan = {
     { foto: 'hito-militar', texto: 'Servicio militar: subteniente de la reserva.' },
     { foto: 'hito-unicauca', texto: 'Ingeniero Agroindustrial de la Universidad del Cauca, del primer grupo de egresados del programa.' },
   ],
-  frase: '«Popayán nos recibió y nos dio con generosidad».',
+  frase: '«Popayán nos recibió y nos da con generosidad».',
 };
 
 export type Icono = 'aula' | 'campo' | 'obra' | 'alcaldia' | 'industria' | 'territorio';
@@ -115,7 +115,7 @@ export const mueve = {
 };
 
 export const cierre = {
-  frase: '«Popayán nos recibió y nos dio con generosidad. Con unión y trabajo colectivo, todos salimos adelante».',
+  frase: '«Popayán nos recibió y nos da con generosidad. Con unión y trabajo colectivo, todos salimos adelante».',
   firma: 'Víctor Armando',
   video: { clave: 'quien-es', youtube: DEMO, etiqueta: 'Ver «¿Quién es Víctor Armando?»' },
   // Completar con los enlaces de sus redes personales. Las que queden vacías se ocultan.

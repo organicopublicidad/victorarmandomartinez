@@ -122,13 +122,20 @@ export const cierre = {
   frase: '«Popayán nos recibe y nos da con generosidad. Con unión y trabajo colectivo, todos salimos adelante».',
   firma: 'Víctor Armando',
   video: { clave: 'quien-es', youtube: DEMO, etiqueta: 'Ver «¿Quién es Víctor Armando?»' },
-  // Completar con los enlaces de sus redes personales. Las que queden vacías se ocultan.
+  // Usuario único en todas las redes: @armandoenequipo. Las redes con url vacía se ocultan.
+  // Facebook va por el ID de la página, que se mantiene igual al cambiar el usuario.
   redes: [
-    { red: 'facebook', url: '' },
-    { red: 'instagram', url: '' },
-    { red: 'tiktok', url: '' },
-    { red: 'x', url: '' },
-    { red: 'youtube', url: '' },
-    { red: 'whatsapp', url: '' },
+    { red: 'facebook', nombre: 'Facebook', url: 'https://www.facebook.com/1336090139589652' },
+    { red: 'instagram', nombre: 'Instagram', url: 'https://www.instagram.com/armandoenequipo/' },
+    { red: 'tiktok', nombre: 'TikTok', url: 'https://www.tiktok.com/@armandoenequipo' },
+    { red: 'x', nombre: 'X', url: 'https://x.com/armandoenequipo' },
+    { red: 'youtube', nombre: 'YouTube', url: '' },
+    { red: 'whatsapp', nombre: 'WhatsApp', url: 'https://wa.me/573181120505' },
   ],
+};
+
+// Botón flotante de WhatsApp Business
+export const whatsapp = {
+  url: 'https://wa.me/573181120505?text=' + encodeURIComponent('¡Hola, Víctor Armando! Quiero conversar.'),
+  etiqueta: 'Conversemos',
 };

@@ -5,7 +5,7 @@ import Foto from '../components/Foto.astro';
 import Icono from '../components/Icono.astro';
 import Tejido from '../components/Tejido.astro';
 import BotonVideo from '../components/BotonVideo.astro';
-import { raices, popayan, trayectoria, construido, mueve, cierre, videosActivos } from '../data/contenido';
+import { raices, popayan, trayectoria, construido, mueve, cierre, videosActivos, whatsapp } from '../data/contenido';
 import { video } from '../lib/medios';
 
 const coloresFicha = ['var(--rojo)', 'var(--azul)', 'var(--ambar)', 'var(--negro)', 'var(--rojo-hondo)'];
@@ -145,13 +145,25 @@ const redes = cierre.redes.filter((r) => r.url);
       {videosActivos && <BotonVideo {...cierre.video} claro />}
       {redes.length > 0 && (
         <ul class="redes">
-          {redes.map((r) => <li><a href={r.url} target="_blank" rel="noopener" aria-label={r.red}><Icono nombre={r.red} size={24} /></a></li>)}
+          {redes.map((r) => <li><a href={r.url} target="_blank" rel="noopener" aria-label={`${r.nombre} de Víctor Armando`}><Icono nombre={r.red} size={24} /></a></li>)}
         </ul>
       )}
     </div>
     <Tejido alto="12px" />
     <p class="pie contenedor">© {new Date().getFullYear()} Víctor Armando Martínez Perafán · <a href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}privacidad/`}>Política de datos</a> · <a href="#" data-configurar-cookies>Configurar cookies</a></p>
   </footer>
+
+  <a class="wa-flotante" href={whatsapp.url} target="_blank" rel="noopener" aria-label={`${whatsapp.etiqueta} por WhatsApp`}>
+    <Icono nombre="whatsapp" size={26} />
+    <span>{whatsapp.etiqueta}</span>
+  </a>
+
+  <script>
+    // Cada clic hacia WhatsApp cuenta como «Contact» en el píxel (activo solo con consentimiento)
+    document.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a[href^="https://wa.me/"]')) (window as any).fbq?.('track', 'Contact');
+    });
+  </script>
 
   <dialog id="visor" aria-label="Video">
     <button type="button" class="visor__cerrar" aria-label="Cerrar video">×</button>
@@ -295,6 +307,21 @@ const redes = cierre.redes.filter((r) => r.url);
   .cierre > :global(.tejido) { position: relative; }
   .pie { position: relative; padding-block: 1.1rem; font-size: 0.85rem; opacity: 0.75; }
   .pie a { color: inherit; }
+
+  /* Botón flotante de WhatsApp: queda debajo del aviso de cookies (z-index 60) */
+  .wa-flotante {
+    position: fixed; right: 16px; bottom: 16px; z-index: 50;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: #25d366; color: var(--negro); text-decoration: none;
+    font: 400 1.35rem/1 var(--display); letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0.7rem 1.1rem 0.6rem 0.9rem; border-radius: 999px;
+    box-shadow: 0 8px 28px rgb(0 0 0 / 0.3); transition: transform 0.2s;
+  }
+  .wa-flotante:hover { transform: translateY(-2px); }
+  @media (max-width: 600px) {
+    .wa-flotante { padding: 0.8rem; }
+    .wa-flotante span { display: none; }
+  }
 
   /* Visor de video */
   #visor { padding: 0; border: 0; background: transparent; width: min(1100px, 94vw); max-width: none; overflow: visible; }

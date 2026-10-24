@@ -6,6 +6,7 @@ import logoApilado from '../assets/logo/logo-apilado.png';
 import logoHorizontal from '../assets/logo/logo-horizontal.png';
 import { foto } from '../lib/medios';
 import Icono from './Icono.astro';
+import Redes from './Redes.astro';
 
 // Dirección de arte: foto horizontal en escritorio y vertical en celular (si existe)
 const h = foto('portada');
@@ -32,6 +33,7 @@ const base = h ? await getImage({ src: h, width: Math.min(1600, h.width), format
       <ul>
         {nav.map((n, i) => <li><a href={`#${n.id}`}><span class="menu__n">{String(i + 1).padStart(2, '0')}</span>{n.texto}</a></li>)}
       </ul>
+      <div class="menu__redes"><Redes variante="menu" /></div>
     </nav>
   </div>
 </header>
@@ -74,6 +76,7 @@ const base = h ? await getImage({ src: h, width: Math.min(1600, h.width), format
     </h1>
     <p class="frase">{portada.frase}</p>
     <p class="credenciales">{portada.credenciales.join(' · ')}</p>
+    <Redes variante="portada" />
   </div>
 
   <ul class="datos">
@@ -93,6 +96,7 @@ const base = h ? await getImage({ src: h, width: Math.min(1600, h.width), format
   .barra nav a:hover { text-decoration: underline; text-decoration-color: var(--ambar); text-decoration-thickness: 3px; text-underline-offset: 6px; }
   .menu__n { display: none; }
   .menu-btn { display: none; }
+  .menu__redes { display: none; }
 
   @media (max-width: 1100px) {
     .barra__in { min-height: 72px; }
@@ -122,6 +126,7 @@ const base = h ? await getImage({ src: h, width: Math.min(1600, h.width), format
     .barra li { border-bottom: 1px solid rgb(255 255 255 / 0.2); }
     .barra nav a { display: flex; align-items: baseline; gap: 1rem; padding: 1.1rem 0 0.9rem; font-size: clamp(2.4rem, 11vw, 3.4rem); white-space: normal; }
     .menu__n { display: inline; font-size: 1.2rem; color: rgb(255 255 255 / 0.8); letter-spacing: 0.1em; }
+    .menu__redes { display: block; }
   }
   :global(html.sin-scroll) { overflow: hidden; }
 
@@ -130,7 +135,7 @@ const base = h ? await getImage({ src: h, width: Math.min(1600, h.width), format
   .portada__img--pendiente { display: grid; place-items: start end; padding: 2rem; background: linear-gradient(120deg, var(--rojo-hondo), var(--rojo)); }
   .portada__img--pendiente span { border: 1px dashed rgb(255 255 255 / 0.6); padding: 0.6rem 0.9rem; font-size: 0.9rem; max-width: 30ch; }
   .portada__velo { position: absolute; inset: 0; background: linear-gradient(90deg, rgb(19 17 12 / 0.78) 0%, rgb(19 17 12 / 0.35) 55%, transparent 80%), linear-gradient(0deg, rgb(19 17 12 / 0.55), transparent 40%); }
-  .portada__texto { position: relative; align-self: end; padding-block: 18vh 2.5rem; }
+  .portada__texto { position: relative; align-self: end; padding-block: 12vh 2rem; }
   .rotulo { display: inline-block; background: var(--ambar); color: var(--negro); font: 400 1.25rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.12em; padding: 0.45rem 0.75rem 0.35rem; }
   h1 { margin-top: 1.4rem; line-height: 0; }
   h1 :global(.logo-portada) { width: clamp(260px, 44vw, 560px); height: auto; filter: drop-shadow(0 2px 14px rgb(19 17 12 / 0.35)); }
@@ -143,7 +148,7 @@ const base = h ? await getImage({ src: h, width: Math.min(1600, h.width), format
   @media (max-width: 760px) {
     .portada { min-height: calc(100svh - 72px); }
     .portada__velo { background: linear-gradient(0deg, rgb(19 17 12 / 0.9) 0%, rgb(19 17 12 / 0.4) 55%, rgb(19 17 12 / 0.1) 100%); }
-    .portada__texto { padding-top: 40vh; }
+    .portada__texto { padding-top: 30vh; }
     .datos { grid-template-columns: 1fr; }
     .datos li { padding-block: 0.7rem; }
     .datos li + li { border-left: 0; border-top: 2px solid rgb(19 17 12 / 0.12); }

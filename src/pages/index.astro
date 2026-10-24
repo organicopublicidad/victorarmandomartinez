@@ -3,13 +3,13 @@ import Base from '../layouts/Base.astro';
 import Portada from '../components/Portada.astro';
 import Foto from '../components/Foto.astro';
 import Icono from '../components/Icono.astro';
+import Redes from '../components/Redes.astro';
 import Tejido from '../components/Tejido.astro';
 import BotonVideo from '../components/BotonVideo.astro';
 import { raices, popayan, trayectoria, construido, mueve, cierre, videosActivos, whatsapp } from '../data/contenido';
 import { video } from '../lib/medios';
 
 const coloresFicha = ['var(--rojo)', 'var(--azul)', 'var(--ambar)', 'var(--negro)', 'var(--rojo-hondo)'];
-const redes = cierre.redes.filter((r) => r.url);
 ---
 <Base>
   <Portada />
@@ -143,11 +143,7 @@ const redes = cierre.redes.filter((r) => r.url);
       <p class="cierre__frase">{cierre.frase}</p>
       <p class="firma">— {cierre.firma}</p>
       {videosActivos && <BotonVideo {...cierre.video} claro />}
-      {redes.length > 0 && (
-        <ul class="redes">
-          {redes.map((r) => <li><a href={r.url} target="_blank" rel="noopener" aria-label={`${r.nombre} de Víctor Armando`}><Icono nombre={r.red} size={24} /></a></li>)}
-        </ul>
-      )}
+      <Redes variante="cierre" />
     </div>
     <Tejido alto="12px" />
     <p class="pie contenedor">© {new Date().getFullYear()} Víctor Armando Martínez Perafán · <a href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}privacidad/`}>Política de datos</a> · <a href="#" data-configurar-cookies>Configurar cookies</a></p>
@@ -301,9 +297,6 @@ const redes = cierre.redes.filter((r) => r.url);
   }
   .firma { margin-top: 1.5rem; font: 400 clamp(2.4rem, 5vw, 3.6rem)/1 var(--display); text-transform: uppercase; color: var(--ambar); }
   .cierre :global(.boton-video) { margin-top: 2rem; }
-  .redes { list-style: none; padding: 0; margin: 2rem 0 0; display: flex; gap: 0.75rem; }
-  .redes a { display: grid; place-items: center; width: 48px; height: 48px; background: #fff; color: var(--rojo); transition: background 0.2s; }
-  .redes a:hover { background: var(--ambar); }
   .cierre > :global(.tejido) { position: relative; }
   .pie { position: relative; padding-block: 1.1rem; font-size: 0.85rem; opacity: 0.75; }
   .pie a { color: inherit; }

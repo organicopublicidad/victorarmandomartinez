@@ -1,0 +1,41 @@
+---
+// Usuario y botones de redes: se repiten en la portada, el menú del celular y el cierre
+import Icono from './Icono.astro';
+import { cierre, usuarioRedes } from '../data/contenido';
+
+interface Props { variante: 'portada' | 'menu' | 'cierre' }
+const { variante } = Astro.props;
+const redes = cierre.redes.filter((r) => r.url);
+---
+{redes.length > 0 && (
+  <div class={`redes redes--${variante}`}>
+    <p class="redes__usuario">Síguelo en redes como <strong>{usuarioRedes}</strong></p>
+    <ul>
+      {redes.map((r) => (
+        <li><a href={r.url} target="_blank" rel="noopener" aria-label={`${r.nombre} de Víctor Armando`}><Icono nombre={r.red} size={24} /></a></li>
+      ))}
+    </ul>
+  </div>
+)}
+
+<style>
+  .redes__usuario { font: 400 1.3rem/1.1 var(--display); text-transform: uppercase; letter-spacing: 0.06em; }
+  .redes__usuario strong { font-weight: 400; color: var(--ambar); }
+  .redes ul { list-style: none; padding: 0; margin: 0.7rem 0 0; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .redes a { display: grid; place-items: center; width: 48px; height: 48px; transition: background 0.2s, color 0.2s; }
+
+  /* Portada y menú: botones translúcidos sobre la foto o el rojo */
+  .redes--portada, .redes--menu { margin-top: 1.6rem; }
+  /* Portada: usuario e íconos en una sola línea para que se vean sin bajar */
+  .redes--portada { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; margin-top: 1.2rem; }
+  .redes--portada ul { margin: 0; gap: 0.5rem; }
+  .redes--portada a { width: 42px; height: 42px; }
+  .redes--portada a, .redes--menu a { color: #fff; background: rgb(255 255 255 / 0.14); border: 1.5px solid rgb(255 255 255 / 0.7); }
+  .redes--portada a:hover, .redes--menu a:hover { background: var(--ambar); border-color: var(--ambar); color: var(--negro); }
+  .redes--menu { padding-top: 0.5rem; }
+
+  /* Cierre: botones blancos con ícono rojo */
+  .redes--cierre { margin-top: 2rem; }
+  .redes--cierre a { background: #fff; color: var(--rojo); }
+  .redes--cierre a:hover { background: var(--ambar); }
+</style>

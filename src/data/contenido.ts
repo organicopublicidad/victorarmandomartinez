@@ -134,6 +134,9 @@ export const cierre = {
   ],
 };
 
+// Usuario único en todas las redes
+export const usuarioRedes = '@armandoenequipo';
+
 // Botón flotante de WhatsApp Business
 export const whatsapp = {
   url: 'https://wa.me/573181120505?text=' + encodeURIComponent('¡Hola, Víctor Armando! Quiero conversar.'),

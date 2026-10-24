@@ -70,7 +70,7 @@ const total = bloques.reduce((n, b) => n + b.piezas.length, 0);
 // Videos por producir: al tenerlos, se activan sus botones en la página
 type Video = { codigo: string; titulo: string; donde: string; ancla: string; duracion: string; que: string };
 const videos: Video[] = [
-  { codigo: 'nadie-llega-solo', titulo: '«Nadie llega solo»', donde: 'Uno · Sus raíces', ancla: 'raices', duracion: '60–90 s', que: 'Los hermanos de Víctor Armando cuentan la cadena de apoyo de la familia: los mayores estudiaron primero y ayudaron a los que venían detrás. Hablan de la abuela y de su negocio de empanadas. Es la pieza ancla del Plan de Contenidos.' },
+  { codigo: 'en-equipo-llegaremos', titulo: '«En equipo llegaremos»', donde: 'Uno · Sus raíces', ancla: 'raices', duracion: '60–90 s', que: 'Los hermanos de Víctor Armando cuentan la cadena de apoyo de la familia: los mayores estudiaron primero y ayudaron a los que venían detrás. Hablan de la abuela y de su negocio de empanadas. Es la pieza ancla del Plan de Contenidos.' },
   { codigo: 'obra-cafe', titulo: 'Testimonio · 200 parcelas cafeteras', donde: 'Cuatro · Lo que ha construido', ancla: 'construido', duracion: '30–60 s', que: 'Un caficultor de El Rosal o Paramillo cuenta cómo cambió su vida desde que su parcela produce café.' },
   { codigo: 'obra-vivero', titulo: 'Testimonio · El primer vivero municipal', donde: 'Cuatro · Lo que ha construido', ancla: 'construido', duracion: '30–60 s', que: 'Quien trabaja hoy en el vivero de San Sebastián muestra las plantas y cuenta para qué sirven a las cuencas y al agua.' },
   { codigo: 'obra-terneras', titulo: 'Testimonio · 630 terneras', donde: 'Cuatro · Lo que ha construido', ancla: 'construido', duracion: '30–60 s', que: 'Una familia campesina cuenta qué significó recibir su primera vaca y cómo creció su ganado.' },
@@ -92,7 +92,7 @@ let n = 0;
       </p>
       <ol class="pasos">
         <li>Primero, los videos prioritarios. Luego, la foto original que corresponde a cada número ({total} en total).</li>
-        <li>Nombra cada archivo con su código en amarillo, por ejemplo <code>hito-alcalde.jpg</code> o <code>nadie-llega-solo.mp4</code>.</li>
+        <li>Nombra cada archivo con su código en amarillo, por ejemplo <code>hito-alcalde.jpg</code> o <code>en-equipo-llegaremos.mp4</code>.</li>
         <li>Entrega el archivo en la mejor resolución disponible. Las fotos de archivo (marcadas «Archivo») van escaneadas a 300 dpi.</li>
       </ol>
       <a class="ver" href={base}>Ver la página completa →</a>

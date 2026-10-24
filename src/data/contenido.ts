@@ -46,11 +46,11 @@ export const portada = {
 export const raices = {
   numero: 'Uno',
   titulo: 'Sus raíces',
-  frase: '«Nadie llega solo».',
+  frase: '«En equipo llegaremos».',
   texto:
     'Es el menor de once hermanos de una familia humilde del Macizo Colombiano. Su madre murió cuando era niño y lo crio su abuela, una mujer exigente y amorosa que con su negocio de empanadas les dio sustento y estudio. Los hermanos mayores estudiaron primero y fueron ayudando a los que venían detrás. Él era el último de esa fila.',
   cierre: 'Con unión y trabajo colectivo, todos salieron adelante.',
-  video: { clave: 'nadie-llega-solo', youtube: DEMO, etiqueta: 'Ver el video «Nadie llega solo»' },
+  video: { clave: 'en-equipo-llegaremos', youtube: DEMO, etiqueta: 'Ver el video «En equipo llegaremos»' },
 };
 
 export const popayan = {
@@ -94,7 +94,7 @@ export const construido = {
   tarjetas: [
     { clave: 'obra-cafe', youtube: DEMO, titulo: '200 parcelas cafeteras', texto: 'Con la Federación de Cafeteros, El Rosal y Paramillo se volvieron corregimientos cafeteros.' },
     { clave: 'obra-vivero', youtube: DEMO, titulo: 'El primer vivero municipal', texto: 'Sigue funcionando en San Sebastián y ha entregado miles de plantas para cuidar el agua.' },
-    { clave: 'obra-terneras', youtube: DEMO, titulo: '630 terneras', texto: 'La primera vaca para familias campesinas que nunca habían tenido una.' },
+    { clave: 'obra-terneras', youtube: DEMO, titulo: '630 terneras', texto: 'Cada familia campesina recibió su primera vaca propia.' },
     { clave: 'obra-casa-paso', youtube: DEMO, titulo: 'La casa de paso', texto: 'Un lugar digno en Popayán para los campesinos que bajaban a una cita médica.' },
     { clave: 'obra-monde', youtube: DEMO, titulo: 'Monde Selection 2011', texto: 'El primer premio internacional del aguardiente caucano, cuando gerenció la Licorera.' },
     { clave: 'obra-art', youtube: DEMO, titulo: '24 municipios', texto: 'Coordinó la regional de la ART en Cauca, Nariño y Valle: la primera del país en cumplimiento de metas.' },
@@ -110,8 +110,8 @@ export const mueve = {
     { clave: 'amor-suyos', titulo: 'Los suyos', texto: 'Agradecido con Dios, con su abuela, con sus hermanos y con sus hijos.' },
   ],
   convicciones: [
-    'Que la educación y las oportunidades no sean un privilegio',
-    'La dignidad no se negocia',
+    'La educación y las oportunidades son para todas las personas',
+    'La dignidad de cada persona va primero',
     'Un techo propio es el punto de partida',
     'El gobierno se debe a la gente',
     'Los recursos públicos son sagrados',
